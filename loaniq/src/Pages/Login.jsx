@@ -8,6 +8,7 @@ export default function Login() {
     if (location.pathname === "/login") {
       document.querySelector("nav").style.display = "none";
       document.querySelector("footer").style.display = "none";
+      document.querySelector(".chat").style.display = "none";
     }
   }, []);
   return (
