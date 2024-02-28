@@ -8,6 +8,7 @@ export default function Register() {
     if (location.pathname === "/register") {
       document.querySelector("nav").style.display = "none";
       document.querySelector("footer").style.display = "none";
+      document.querySelector(".chat").style.display = "none";
     }
   }, []);
   return (
@@ -98,7 +99,7 @@ export default function Register() {
                           <p class="small or-span" href="#!">
                             <span>OR</span>
                           </p>
-                          <a class="text-muted" href="#!">
+                          <a class="p" href="/login">
                             Login
                           </a>
                         </div>
