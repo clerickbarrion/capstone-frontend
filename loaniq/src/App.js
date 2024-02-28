@@ -8,7 +8,8 @@ import About from "./Pages/About";
 import Apply from "./Pages/Apply";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
-import Chat from './Components/Chat';
+import Chat from "./Components/Chat";
+
 function App() {
   return (
     <Router>
@@ -21,6 +22,7 @@ function App() {
           <Route path="/login" element={<Login />}/>
           <Route path="/register" element={<Register />}/>
         </Routes>
+        <Chat />
         <Footer />
         <style jsx>
           {`
