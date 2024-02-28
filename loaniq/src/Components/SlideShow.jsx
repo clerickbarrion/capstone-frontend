@@ -1,16 +1,9 @@
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import {
-  Navigation,
-  Pagination,
-  Scrollbar,
-  A11y,
-  Autoplay,
-} from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "swiper/css/scrollbar";
 
 export default function SlideShow() {
   const [swiper, setSwiper] = useState(null);
@@ -26,20 +19,19 @@ export default function SlideShow() {
     }
   };
   return (
-    <div>
+    <div className="swiper-container">
+      <h1>Slide Show</h1>
       <Swiper
-        modules={[Navigation, Pagination, Scrollbar]}
-        spaceBetween={50}
+        modules={[Navigation, Pagination]}
+        spaceBetween={30}
         slidesPerView={3}
         pagination={{ clickable: true }}
-        scrollbar={{ draggable: true }}
         onSwiper={setSwiper}
         loop={true}
         navigation={{
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
         }}
-        autoplay={{ delay: 9000 }}
         onSlideChange={() => console.log("slide change")}
       >
         <div
@@ -59,13 +51,27 @@ export default function SlideShow() {
 
       <style jsx>{`
         .swiper-container {
-          border: 1px solid #ccc;
+          width: calc(100vw - 800px);
+          overflow: hidden;
+          margin: 0 420px;
+        }
+        .swiper-container h1 {
+          display: flex;
+          justify-content: center;
+        }
+        .swiper-wrapper {
+          display: flex !important;
         }
 
         .swiper-slide {
           border: 1px solid #ccc;
           padding: 20px;
         }
+        .swiper swiper-initialized swiper-horizontal swiper-backface-hidden {
+          display: flex;
+          justify-content: center;
+        }
+
         .slide1,
         .slide2,
         .slide3,
@@ -75,8 +81,19 @@ export default function SlideShow() {
           justify-content: center;
           align-items: center;
           font-size: 30px;
-          height: 200px;
+          height: 300px;
           width: 100px;
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+          color: black;
+          height: 1rem !important;
+          width: 1rem !important;
+        }
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
+          font-size: 1rem;
         }
       `}</style>
     </div>
