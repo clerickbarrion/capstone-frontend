@@ -1,7 +1,7 @@
 import './App.css';
 import Footer from './Footer';
 import Header from './Header';
-
+import Chat from './components/Chat';
 function App() {
   return (
     <div class="d-flex flex-column min-vh-100">
@@ -13,6 +13,7 @@ function App() {
       }
       `}
       </style>
+      <Chat/>
     </div>
   );
 }
