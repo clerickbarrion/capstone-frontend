@@ -1,28 +1,59 @@
-import React from 'react'
+import React, {useState,useEffect} from 'react'
 import '../css/chat.scss'
+import {io} from 'socket.io-client'
 
 export default function Chat() {
+    const [human, setHuman] = React.useState(false)
+    
+    const socket = io('http://localhost:4000')
+
+    useEffect(() => {
+        socket.on('chat message', message => {
+            let messages = document.getElementById('messages')
+            let newMessage = document.createElement('p')
+            newMessage.textContent = message
+            messages.appendChild(newMessage)
+            messages.scrollTop += 1000
+        })
+        socket.on('roomJoined', room=>console.log(room))
+    },[])
+    
+
     async function enterMessage(event){
         if(event.key === 'Enter'){
             let message = event.target.value
             event.target.blur()
-            event.target.value = ''.trim()
+            event.target.value = ''
             let messages = document.getElementById('messages')
             const history = []
             messages.childNodes.forEach(child => history.push(child.textContent))
             let newMessage = document.createElement('p')
-            newMessage.textContent = `You: ${message}`
-            messages.appendChild(newMessage)
-            messages.scrollTop += 1000
-            const botMessage = await fetch('http://localhost:4000/api/botMessage', {
-                body: JSON.stringify({message,history}), 
-                method: 'POST', 
-                headers: {'Content-Type': 'application/json'}
-            }).then(response => response.json()).then(data => data)
-            const botReply = document.createElement('p')
-            botReply.textContent = `Kale: ${botMessage}`
-            messages.appendChild(botReply)
-            messages.scrollTop += 1000
+            if (human){
+                socket.emit('chat message', message)
+            }else{
+                if (message === '1'){
+                    newMessage.innerHTML = `Click on one of these people to chat with them:\n
+                                            <mark>Clerick</mark>`
+                    messages.appendChild(newMessage)
+                    newMessage.querySelector('mark').addEventListener('click', () => {
+                        socket.emit('joinRoom', newMessage.querySelector('mark').textContent)
+                        setHuman(true)
+                    })
+                } else {
+                    newMessage.textContent = `You: ${message}`
+                    messages.appendChild(newMessage)
+                    messages.scrollTop += 1000
+                    const botMessage = await fetch('http://localhost:4000/api/botMessage', {
+                        body: JSON.stringify({message,history}), 
+                        method: 'POST', 
+                        headers: {'Content-Type': 'application/json'}
+                    }).then(response => response.json()).then(data => data)
+                    const botReply = document.createElement('p')
+                    botReply.textContent = `Kale: ${botMessage}`
+                    messages.appendChild(botReply)
+                    messages.scrollTop += 1000
+                }
+            }
         }
     }
     function openChat(){
@@ -34,7 +65,7 @@ export default function Chat() {
             <button onClick={openChat}>Chat</button>
             <div id='chat-container'>
                 <div id="messages">
-                    <p>Kale: Hi there! What can I help you with today?</p>
+                    <p>Kale: Hi there! What can I help you with today? Type 1 to chat with a human.</p>
                 </div>
                 <small></small>
                 <form id="input-box">
