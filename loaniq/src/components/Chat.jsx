@@ -19,10 +19,9 @@ export default function Chat() {
                 method: 'POST', 
                 headers: {'Content-Type': 'application/json'}
             }).then(response => response.json()).then(data => data)
-            let botReply = document.createElement('p')
+            const botReply = document.createElement('p')
             botReply.textContent = `Kale: ${botMessage}`
             messages.appendChild(botReply)
-            console.log(messages)
             messages.scrollTop += 1000
         }
     }
