@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "./loaniq-logo.png";
+import logo from "../Assets/Images/loaniq-logo.png";
 
 
 export default function Footer() {
@@ -17,37 +17,51 @@ export default function Footer() {
             <p class="text-body-secondary">© 2024</p>
           </div>
 
-          <div class="col mb-3"></div>
-
           <div class="col mb-3">
-            <h5>Section</h5>
+            <h5>Quick Links</h5>
             <ul class="nav flex-column">
               <li class="nav-item mb-2">
-                <a href="#" class="nav-link p-0 text-body-secondary">
+                <a href="/" class="nav-link p-0 text-body-secondary">
                   Home
                 </a>
               </li>
               <li class="nav-item mb-2">
-                <a href="#" class="nav-link p-0 text-body-secondary">
-                  Features
+                <a href="/apply" class="nav-link p-0 text-body-secondary">
+                  Apply
                 </a>
               </li>
               <li class="nav-item mb-2">
-                <a href="#" class="nav-link p-0 text-body-secondary">
-                  Pricing
-                </a>
-              </li>
-              <li class="nav-item mb-2">
-                <a href="#" class="nav-link p-0 text-body-secondary">
-                  FAQs
-                </a>
-              </li>
-              <li class="nav-item mb-2">
-                <a href="#" class="nav-link p-0 text-body-secondary">
-                  About
+                <a href="/about" class="nav-link p-0 text-body-secondary">
+                  About Us
                 </a>
               </li>
             </ul>
+          </div>
+
+          <div class="col mb-2">
+            <h5>Socials</h5>
+            <ul class="nav flex-column">
+              <li class="nav-item mb-2">
+                <a href="#" class="nav-link p-0 text-body-secondary">
+                  Instagram
+                </a>
+              </li>
+              <li class="nav-item mb-2">
+                <a href="#" class="nav-link p-0 text-body-secondary">
+                  GitHub
+                </a>
+              </li>
+              <li class="nav-item mb-2">
+                <a href="#" class="nav-link p-0 text-body-secondary">
+                  LinkedIn
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col mb-3">
+            <h5>Disclaimer</h5>
+            <p>This app is for educational purposes only and should not be taken seriously. Content provided is for entertainment and learning, not professional advice. Use at your own discretion.</p>
           </div>
         </footer>
       </div>
