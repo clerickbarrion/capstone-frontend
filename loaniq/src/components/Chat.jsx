@@ -22,10 +22,10 @@ export default function Chat() {
         })
     },[])
     async function enterMessage(event, props){
-        if(event.key === 'Enter'){
-            let message = event.target.value
+        if(event.key === 'Enter' || event.type === 'click'){
+            let message = event.target.value || document.querySelector('#input-box').querySelector('input').value
             event.target.blur()
-            event.target.value = ''
+            document.querySelector('#input-box').querySelector('input').value = ''
             let messages = document.getElementById('messages')
             const history = []
             messages.childNodes.forEach(child => history.push(child.textContent))
@@ -81,7 +81,7 @@ export default function Chat() {
                     <small></small>
                     <form id="input-box">
                         <input type="text" placeholder='Write a message' onKeyDown={enterMessage}></input>
-                        <button type="button" class="send-btn"><LuSend /></button>
+                        <button type="button" class="send-btn" onClick={enterMessage}><LuSend /></button>
                     </form>
                 </div>
             </div>
