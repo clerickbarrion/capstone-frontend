@@ -2,22 +2,28 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import DashboardHeader from "../Components/DashboardHeader";
 import { RxHamburgerMenu } from "react-icons/rx";
+import LoanCardGrid from "../Components/LoanCardGrid";
 
 export default function AdminDashboard() {
   const location = useLocation();
   const [showSideNav, setShowSideNav] = useState(false);
+  
+  function setSideNav() {
+    setShowSideNav(!showSideNav);
+  }
 
   useEffect(() => {
     if (location.pathname === "/admin/dashboard") {
       document.querySelector(".main-header").style.display = "none";
-      document.querySelector("footer").style.display = "none";
+      document.querySelector(".main-footer").style.display = "none";
       document.querySelector(".chat").style.display = "none";
+      document.querySelector(".openChatBtn").style.display = "none";
     }
   }, []);
 
   return (
     <div>
-      <header class="d-flex w-100 justify-content-between align-items-center">
+      <header class="d-flex w-100 justify-content-between align-items-center position-relative z-1">
         <div class="d-flex align-items-center">
           <RxHamburgerMenu
             onClick={() => {
@@ -32,7 +38,15 @@ export default function AdminDashboard() {
           </button>
         </a>
       </header>
-      <DashboardHeader show={showSideNav} />
+
+      <DashboardHeader
+        show={showSideNav}
+        links={["All Loans", "Assigned Loans", "Client Payments"]}
+        setSideNav = {setSideNav}
+      />
+
+      <LoanCardGrid />
+
       <style jsx>{`
         .welcome-msg {
           margin: 0 15px;

@@ -31,25 +31,23 @@ export default function Header(props) {
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <ul class="navbar-nav me-auto">
-              <li class="nav-item home-nav-item">
-                <a class="nav-link" aria-current="page" href="/">
+              <li class="nav-item mx-3">
+                <a class="nav-link home-nav-item pb-1 px-0" aria-current="page" href="/">
                   Home
                 </a>
               </li>
-              <li class="nav-item apply-nav-item">
-                <a class="nav-link" href="/apply">
+              <li class="nav-item mx-3">
+                <a class="nav-link apply-nav-item pb-1 px-0" href="/apply">
                   Apply
                 </a>
               </li>
-              <li class="nav-item about-nav-item">
-                <a class="nav-link" href="/about">
+              <li class="nav-item mx-3">
+                <a class="nav-link about-nav-item pb-1 px-0" href="/about">
                   About Us
                 </a>
               </li>
             </ul>
-            <a href="/login" id="login-btn">
-              <button class="btn btn-outline-dark">Login</button>
-            </a>
+            <a href="/login"><button class="btn btn-outline-dark login-btn">Login</button></a>
           </div>
         </div>
       </nav>
@@ -63,6 +61,13 @@ export default function Header(props) {
           .btn-outline-dark:hover {
             border: 1px solid #182d09;
             background-color: #182d09;
+          }
+
+          @media screen and (max-width: 992px) {
+            .login-btn {
+              margin-top: 10px;
+              margin-left: 15px;
+            }
           }
         `}
       </style>

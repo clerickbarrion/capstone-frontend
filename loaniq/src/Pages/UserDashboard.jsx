@@ -10,12 +10,13 @@ export default function UserDashboard() {
   useEffect(() => {
     if (location.pathname === "/user/dashboard") {
       document.querySelector(".main-header").style.display = "none";
-      document.querySelector("footer").style.display = "none";
+      document.querySelector(".main-footer").style.display = "none";
       document.querySelector(".chat").style.display = "none";
+      document.querySelector(".openChatBtn").style.display = "none";
     }
   }, []);
 
-  return (
+  return (  
     <div>
       <header class="d-flex w-100 justify-content-between align-items-center">
         <div class="d-flex align-items-center">
@@ -32,7 +33,7 @@ export default function UserDashboard() {
           </button>
         </a>
       </header>
-      <DashboardHeader show={showSideNav} />
+      <DashboardHeader show={showSideNav} links={['My Loans', 'My Payments']}/>
       <style jsx>{`
         .welcome-msg {
           margin: 0 15px;
