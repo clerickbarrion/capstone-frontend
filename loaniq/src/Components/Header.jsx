@@ -1,13 +1,22 @@
 import React from "react";
 import logo from "../Assets/Images/loaniq-logo.png";
 
-export default function Header() {
+export default function Header(props) {
+  const { activePage } = props; // Destructuring activePage from props
+  const logoStyle = activePage === "about" ? "white" : "";
   return (
     <div class="mt-2 mb-5 main-header">
       <nav class="navbar navbar-expand-lg container">
         <div class="container-fluid">
           <a class="navbar-brand" href="/">
-            <img src={logo} style={{ width: "50px", height: "auto" }} />
+            <img
+              src={logo}
+              style={{
+                width: "50px",
+                height: "auto",
+                filter: `brightness(${logoStyle})`,
+              }}
+            />
           </a>
           <button
             class="navbar-toggler"
