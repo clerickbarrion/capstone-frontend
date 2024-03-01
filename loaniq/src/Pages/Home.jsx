@@ -9,7 +9,7 @@ export default function Home() {
         <Hero />
       </div>
       <div className="slideshow-container">
-        <SlideShow />
+        {/* <SlideShow /> */}
       </div>
       <style jsx>
         {`
