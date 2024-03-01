@@ -27,6 +27,7 @@ export default function Login() {
     .then(response => response.json())
     .then(data => {
       console.log('Success:', data);
+      localStorage.setItem('userInfo', JSON.stringify(data));
       window.location = '/user/dashboard'; // Redirect to /user/dashboard
     })
     .catch((error) => {

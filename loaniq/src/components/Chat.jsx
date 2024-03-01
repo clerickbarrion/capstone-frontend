@@ -1,16 +1,31 @@
-import React from 'react'
+import React, {useState,useEffect} from 'react'
 import '../css/chat.scss'
 import { IoChatboxEllipses } from "react-icons/io5";
 import { LuSend } from "react-icons/lu";
 import { IoClose } from "react-icons/io5";
 import { RiRobot2Line } from "react-icons/ri";
+import {io} from 'socket.io-client'
 
 export default function Chat() {
+    const [human, setHuman] = useState(false)
+    const [room, setRoom] = useState('')
+
+    const socket = io('http://localhost:4000')
+
+    useEffect(() => {
+        socket.on('chat message', message => {
+            let messages = document.getElementById('messages')
+            let newMessage = document.createElement('p')
+            newMessage.textContent = message
+            messages.appendChild(newMessage)
+            messages.scrollTop += 1000
+        })
+    },[])
     async function enterMessage(event, props){
         if(event.key === 'Enter'){
             let message = event.target.value
             event.target.blur()
-            event.target.value = ''.trim()
+            event.target.value = ''
             let messages = document.getElementById('messages')
             const history = []
             messages.childNodes.forEach(child => history.push(child.textContent))

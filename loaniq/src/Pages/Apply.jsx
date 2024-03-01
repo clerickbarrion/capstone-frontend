@@ -19,6 +19,7 @@ export default function Apply() {
   function handleSubmit(e) {
     e.preventDefault();
     const submission = {
+      UserID: JSON.parse(localStorage.getItem('userInfo'))[0].userid,
       creditScore: e.target[0].value,
       income: e.target[1].value,
       expenses: e.target[2].value,

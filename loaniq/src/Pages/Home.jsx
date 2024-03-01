@@ -17,7 +17,7 @@ export default function Home() {
         <Hero2 />
       </div>
       <div className="slideshow-container">
-        <SlideShow />
+        {/* <SlideShow /> */}
       </div>
       <style jsx>
         {`

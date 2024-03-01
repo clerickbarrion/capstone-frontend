@@ -12,6 +12,7 @@ import Chat from "./Components/Chat";
 import AdminLogin from "./Pages/AdminLogin";
 import AdminDashboard from "./Pages/AdminDashboard";
 import UserDashboard from "./Pages/UserDashboard";
+import Payments from "./Pages/Payments";
 
 function App() {
   const [activePage, setActivePage] = useState("home");
@@ -32,6 +33,7 @@ function App() {
           <Route path="/admin/login" element={<AdminLogin />}/>
           <Route path="/admin/dashboard" element={<AdminDashboard />}/>
           <Route path="/user/dashboard" element={<UserDashboard />}/>
+          <Route path="/payments" element={<Payments />}/>
         </Routes>
         <Chat />
         <Footer />
