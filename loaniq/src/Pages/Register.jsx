@@ -19,7 +19,6 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await fetch('http://localhost:4000/newuser', {
-
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -29,8 +28,11 @@ export default function Register() {
     .then(response => response.json())
     .then(data => {
       console.log('Success:', data);
+      window.location = '/user/dashboard'; // Redirect to /user/dashboard
     })
-   
+    .catch((error) => {
+      console.error('Error:', error);
+    });
   };
   return (
     <div>

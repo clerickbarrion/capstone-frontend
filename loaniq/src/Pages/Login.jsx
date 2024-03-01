@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import logo from "../Assets/Images/loaniq-logo.png";
 
 export default function Login() {
   let location = useLocation();
+  const [emailaddress, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   useEffect(() => {
     if (location.pathname === "/login") {
       document.querySelector("nav").style.display = "none";
@@ -11,6 +13,25 @@ export default function Login() {
       document.querySelector(".chat").style.display = "none";
     }
   }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch('http://localhost:4000/signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ emailaddress, password})
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+      window.location = '/user/dashboard'; // Redirect to /user/dashboard
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  };
   return (
     <div className="container-fluid py-3 my-auto mx-auto">
       <section class="h-100">
@@ -31,7 +52,7 @@ export default function Login() {
                         </a>
                       </div>
 
-                      <form>
+                      <form onSubmit={handleSubmit}>
                         <p>Please login to your account</p>
 
                         <div class="form-floating mb-4">
@@ -40,6 +61,8 @@ export default function Login() {
                             class="form-control"
                             id="floatingInput"
                             placeholder="name@example.com"
+                            value={emailaddress}
+                            onChange={(e) => setEmail(e.target.value)}
                           />
                           <label for="floatingInput">Email address</label>
                         </div>
@@ -50,6 +73,8 @@ export default function Login() {
                             class="form-control"
                             id="floatingInput"
                             placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                           />
                           <label for="floatingInput">Password</label>
                         </div>
@@ -57,7 +82,7 @@ export default function Login() {
                         <div class="text-center pt-1 mb-5 pb-1">
                           <button
                             class="btn btn-primary btn-block fa-lg mb-3 w-100"
-                            type="button"
+                            type="submit"
                           >
                             Log in
                           </button>
