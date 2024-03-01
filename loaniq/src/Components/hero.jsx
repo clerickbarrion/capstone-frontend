@@ -8,6 +8,7 @@ export default function Hero() {
   const handleGetStarted = () => {
     navigate("/apply");
   };
+
   return (
     <div className="container">
       <div className="row align-items-center">
@@ -25,19 +26,19 @@ export default function Hero() {
             <img src={heroImage} alt="hero" className="img-fluid hero-image" />
           </div>
         </div>
-        <div className="wave">
-          <svg
-            data-name="Layer 1"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1200 120"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
-              className="shape-fill"
-            ></path>
-          </svg>
-        </div>
+      </div>
+      <div className="wave">
+        <svg
+          data-name="Layer 1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+            className="shape-fill"
+          ></path>
+        </svg>
       </div>
 
       <style jsx>{`
@@ -48,15 +49,7 @@ export default function Hero() {
           max-height: 800px;
           z-index: 1;
         }
-        .hero-image::after {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          z-index: 2;
-        }
+
         .wave {
           position: absolute;
           bottom: 0;
@@ -64,16 +57,14 @@ export default function Hero() {
           width: 100%;
           overflow: hidden;
           line-height: 0;
-          filter: drop-shadow(
-            0px 5px 15px rgba(0, 0, 0, 0.1)
-          ); /* Add box shadow to the curve */
         }
 
         .wave svg {
           position: relative;
           display: block;
-          width: calc(168% + 1.3px);
+          width: calc(168% + 2.3px);
           height: 240px;
+          filter: drop-shadow(0px 5px 15px rgba(0, 0, 0, 0.1));
         }
 
         .wave .shape-fill {

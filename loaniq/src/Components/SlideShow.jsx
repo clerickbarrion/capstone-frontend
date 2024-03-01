@@ -20,7 +20,7 @@ export default function SlideShow() {
   };
   return (
     <div className="swiper-container">
-      <h1>Slide Show</h1>
+      <h1>The LoanIQ Advantage</h1>
       <Swiper
         modules={[Navigation, Pagination]}
         spaceBetween={30}
@@ -38,11 +38,49 @@ export default function SlideShow() {
           className="swiper-button-next"
           onClick={handleNextButtonClick}
         ></div>
-        <SwiperSlide className="slide1">Slide 1</SwiperSlide>
-        <SwiperSlide className="slide2">Slide 2</SwiperSlide>
-        <SwiperSlide className="slide3">Slide 3</SwiperSlide>
-        <SwiperSlide className="slide4">Slide 4</SwiperSlide>
-        <SwiperSlide className="slide5">Slide 5</SwiperSlide>
+        <SwiperSlide className="slide1">
+          <h4>Streamlined Application Process:</h4>
+          <p>
+            Apply for loans effortlessly from anywhere, whether it's your home,
+            office, or on the go. Our intuitive platform simplifies the
+            application process, saving you time and hassle.
+          </p>
+        </SwiperSlide>
+        <SwiperSlide className="slide2">
+          <h4>Competitive Loan Options:</h4>
+          <p>
+            We understand that every financial situation is unique. That's why
+            we offer competitive rates and a variety of loan options tailored to
+            your specific needs and circumstances.
+          </p>
+        </SwiperSlide>
+        <SwiperSlide className="slide3">
+          <h4>Personalized Guidance:</h4>{" "}
+          <p>
+            Our team of experts is dedicated to providing personalized guidance
+            throughout your loan journey. From application to approval, we're
+            here to answer your questions and address your concerns every step
+            of the way.{" "}
+          </p>
+        </SwiperSlide>
+        <SwiperSlide className="slide4">
+          <h4>Personalized Guidance:</h4>{" "}
+          <p>
+            Our team of experts is dedicated to providing personalized guidance
+            throughout your loan journey. From application to approval, we're
+            here to answer your questions and address your concerns every step
+            of the way.{" "}
+          </p>
+        </SwiperSlide>
+        <SwiperSlide className="slide5">
+          <h4>Personalized Guidance:</h4>{" "}
+          <p>
+            Our team of experts is dedicated to providing personalized guidance
+            throughout your loan journey. From application to approval, we're
+            here to answer your questions and address your concerns every step
+            of the way.{" "}
+          </p>
+        </SwiperSlide>
         <div
           className="swiper-button-prev"
           onClick={handlePrevButtonClick}
@@ -78,11 +116,11 @@ export default function SlideShow() {
         .slide4,
         .slide5 {
           display: flex;
-          justify-content: center;
+          flex-direction: column;
           align-items: center;
-          font-size: 30px;
+          text-align: center;
+          font-size: 13px;
           height: 300px;
-          width: 100px;
         }
 
         .swiper-button-next,
