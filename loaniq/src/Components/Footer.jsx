@@ -1,10 +1,9 @@
 import React from "react";
 import logo from "../Assets/Images/loaniq-logo.png";
 
-
 export default function Footer() {
   return (
-    <div class="mt-auto">
+    <div class="mt-auto main-footer">
       <div class="container">
         <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5">
           <div class="col mb-3">
@@ -35,6 +34,11 @@ export default function Footer() {
                   About Us
                 </a>
               </li>
+              <li class="nav-item mb-2">
+                <a href="/admin/login" class="nav-link p-0 text-body-secondary">
+                  Admin Login
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -61,10 +65,19 @@ export default function Footer() {
 
           <div class="col mb-3">
             <h5>Disclaimer</h5>
-            <p>This app is for educational purposes only and should not be taken seriously. Content provided is for entertainment and learning, not professional advice. Use at your own discretion.</p>
+            <p>
+              This app is for educational purposes only and should not be taken
+              seriously. Content provided is for entertainment and learning, not
+              professional advice. Use at your own discretion.
+            </p>
           </div>
         </footer>
       </div>
+      <style jsx>{`
+      .main-footer {
+        border-top: 1px solid #d4cbb4;
+      }
+      `}</style>
     </div>
   );
 }

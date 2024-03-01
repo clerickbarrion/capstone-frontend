@@ -3,7 +3,7 @@ import logo from "../Assets/Images/loaniq-logo.png";
 
 export default function Header() {
   return (
-    <div class="mb-5">
+    <div class="mt-2 mb-5 main-header">
       <nav class="navbar navbar-expand-lg container">
         <div class="container-fluid">
           <a class="navbar-brand" href="/">
@@ -22,17 +22,17 @@ export default function Header() {
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <ul class="navbar-nav me-auto">
-              <li class="nav-item">
+              <li class="nav-item home-nav-item">
                 <a class="nav-link" aria-current="page" href="/">
                   Home
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item apply-nav-item">
                 <a class="nav-link" href="/apply">
                   Apply
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item about-nav-item">
                 <a class="nav-link" href="/about">
                   About Us
                 </a>
