@@ -7,6 +7,8 @@ export default function Apply() {
   const backBtn = useRef(null);
   const nextBtn = useRef(null);
   const submitBtn = useRef(null);
+  const step1Btn = useRef(null);
+  const step2Btn = useRef(null);
 
   useEffect(() => {
     document.querySelector(".loanForm").style.display = "none";
@@ -42,6 +44,7 @@ export default function Apply() {
     backBtn.current.style.display = "none";
     nextBtn.current.style.display = "block";
     submitBtn.current.style.display = "none";
+    setStep(1);
   }
 
   function showStep2() {
@@ -50,23 +53,36 @@ export default function Apply() {
     nextBtn.current.style.display = "none";
     backBtn.current.style.display = "block";
     submitBtn.current.style.display = "block";
+    setStep(2);
   }
 
   useEffect(() => {
-    if (step === 1) showStep1();
-    else showStep2();
+    if (step === 1) {
+      showStep1();
+      step1Btn.current.style.color = "#a18c7d";
+      step2Btn.current.style.color = "black";
+      step1Btn.current.style.borderBottom = "1px solid #a18c7d";
+      step2Btn.current.style.borderBottom = "1px solid black";
+    }
+    else {
+      showStep2();
+      step2Btn.current.style.color = "#a18c7d";
+      step1Btn.current.style.color = "black";
+      step2Btn.current.style.borderBottom = "1px solid #a18c7d";
+      step1Btn.current.style.borderBottom = "1px solid black";
+    }
   }, [step]);
 
   return (
     <div class="container">
       <div class="row mb-5">
         <div class="col">
-          <button class="step-btn w-100" onClick={() => showStep1()}>
+          <button ref={step1Btn} class="step-btn w-100" onClick={() => showStep1()}>
             Your Information
           </button>
         </div>
         <div class="col">
-          <button class="step-btn w-100" onClick={() => showStep2()}>
+          <button ref={step2Btn} class="step-btn w-100" onClick={() => showStep2()}>
             Loan Information
           </button>
         </div>
