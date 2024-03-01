@@ -3,8 +3,9 @@ import '../css/chat.scss'
 import {io} from 'socket.io-client'
 
 export default function Chat() {
-    const [human, setHuman] = React.useState(false)
-    
+    const [human, setHuman] = useState(false)
+    const [room, setRoom] = useState('')
+
     const socket = io('http://localhost:4000')
 
     useEffect(() => {
@@ -15,7 +16,6 @@ export default function Chat() {
             messages.appendChild(newMessage)
             messages.scrollTop += 1000
         })
-        socket.on('roomJoined', room=>console.log(room))
     },[])
     
 
@@ -29,15 +29,20 @@ export default function Chat() {
             messages.childNodes.forEach(child => history.push(child.textContent))
             let newMessage = document.createElement('p')
             if (human){
-                socket.emit('chat message', message)
+                socket.emit('chat message', {message,room})
             }else{
                 if (message === '1'){
                     newMessage.innerHTML = `Click on one of these people to chat with them:\n
-                                            <mark>Clerick</mark>`
+                                            <mark>Clerick</mark>\n
+                                            <mark>John</mark>\n`
                     messages.appendChild(newMessage)
-                    newMessage.querySelector('mark').addEventListener('click', () => {
-                        socket.emit('joinRoom', newMessage.querySelector('mark').textContent)
-                        setHuman(true)
+                    const names = newMessage.querySelectorAll('mark')
+                    names.forEach(name => {
+                        name.addEventListener('click', () => {
+                            socket.emit('joinRoom', name.textContent)
+                            setHuman(true)
+                            setRoom(name.textContent)
+                        })
                     })
                 } else {
                     newMessage.textContent = `You: ${message}`
