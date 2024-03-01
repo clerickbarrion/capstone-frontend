@@ -1,15 +1,36 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import logo from "../Assets/Images/loaniq-logo.png";
 
 export default function Register() {
   let location = useLocation();
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [emailaddress, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmpassword, setConfirmpassword] = useState('');
   useEffect(() => {
     if (location.pathname === "/register") {
       document.querySelector("nav").style.display = "none";
       document.querySelector("footer").style.display = "none";
     }
   }, []);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch('http://localhost:4000/newuser', {
+
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ firstname, lastname, emailaddress, password, confirmpassword})
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+    })
+   
+  };
   return (
     <div>
       <section class="h-100">
@@ -30,7 +51,7 @@ export default function Register() {
                         </a>
                       </div>
 
-                      <form>
+                      <form onSubmit={handleSubmit}>
                         <p>Please sign-up to create your account</p>
 
                         <div class="row">
@@ -41,6 +62,8 @@ export default function Register() {
                                 class="form-control"
                                 id="floatingInput"
                                 placeholder="First Name"
+                                value={firstname}
+                                onChange={(e) => setFirstname(e.target.value)}
                               />
                               <label for="floatingInput">First Name</label>
                             </div>
@@ -52,6 +75,8 @@ export default function Register() {
                                 class="form-control"
                                 id="floatingInput"
                                 placeholder="Last Name"
+                                value={lastname}
+                                onChange={(e) => setLastname(e.target.value)}
                               />
                               <label for="floatingInput">Last Name</label>
                             </div>
@@ -64,6 +89,8 @@ export default function Register() {
                             class="form-control"
                             id="floatingInput"
                             placeholder="name@example.com"
+                            value={emailaddress}
+                            onChange={(e) => setEmail(e.target.value)}
                           />
                           <label for="floatingInput">Email address</label>
                         </div>
@@ -74,6 +101,8 @@ export default function Register() {
                             class="form-control"
                             id="floatingInput"
                             placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                           />
                           <label for="floatingInput">Password</label>
                         </div>
@@ -84,6 +113,8 @@ export default function Register() {
                             class="form-control"
                             id="floatingInput"
                             placeholder="Confirm Password"
+                            value={confirmpassword}
+                            onChange={(e) => setConfirmpassword(e.target.value)}
                           />
                           <label for="floatingInput">Confirm Password</label>
                         </div>
@@ -91,7 +122,7 @@ export default function Register() {
                         <div class="text-center pt-1 mb-5 pb-1">
                           <button
                             class="btn btn-primary btn-block fa-lg mb-3 w-100"
-                            type="button"
+                            type="submit"
                           >
                             Sign-up
                           </button>
