@@ -9,6 +9,9 @@ import Apply from "./Pages/Apply";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Chat from "./Components/Chat";
+import AdminLogin from "./Pages/AdminLogin";
+import AdminDashboard from "./Pages/AdminDashboard";
+import UserDashboard from "./Pages/UserDashboard";
 
 function App() {
   const [activePage, setActivePage] = useState("home");
@@ -21,14 +24,14 @@ function App() {
       <div class="d-flex flex-column min-vh-100">
         <Header activePage={activePage} />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/about"
-            element={<About handlePageChange={handlePageChange} />}
-          />
-          <Route path="/apply" element={<Apply />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Home />}/>
+          <Route path="/about" element={<About />}/>
+          <Route path="/apply" element={<Apply />}/>
+          <Route path="/login" element={<Login />}/>
+          <Route path="/register" element={<Register />}/>
+          <Route path="/admin/login" element={<AdminLogin />}/>
+          <Route path="/admin/dashboard" element={<AdminDashboard />}/>
+          <Route path="/user/dashboard" element={<UserDashboard />}/>
         </Routes>
         <Chat />
         <Footer />
