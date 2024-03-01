@@ -11,6 +11,7 @@ export default function Apply() {
   const step2Btn = useRef(null);
 
   useEffect(() => {
+    document.querySelector(".apply-nav-item").style.borderBottom = "2px solid #182d09";
     document.querySelector(".loanForm").style.display = "none";
     submitBtn.current.style.display = "none";
   }, []);

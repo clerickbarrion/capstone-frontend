@@ -1,10 +1,14 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Image1 from "../Assets/Images/clerick.jpg";
 import Image2 from "../Assets/Images/brynn.jpg";
 import Image3 from "../Assets/Images/benji.jpg";
 import Image4 from "../Assets/Images/tommy.jpg";
 
 export default function About() {
+  useEffect(() => {
+    document.querySelector(".about-nav-item").style.borderBottom = "2px solid #182d09";
+  }, []);
+
   return (
     <div className="About-Us-container">
       <div className="wave-top">

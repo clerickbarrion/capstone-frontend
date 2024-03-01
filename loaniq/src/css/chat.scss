@@ -1,34 +1,115 @@
-.chat {
-    background-color: white;
+.fullChat {
     position: fixed;
-    bottom: 0;
-    width: 23%;
-    left: 76%;
-    border:  solid black;
-    box-shadow: rgb(51, 51, 51) 3px 0px 11px, rgb(51, 51, 51) -5px 0px 15px;
-    button {
-        width: 100%;
+    bottom: 5%;
+    left: 75%;
+}
+
+.openChatBtn {
+    top: 88%;
+    left: 95%;
+    width: 50px;
+    border-radius: 100%;
+    font-size: 2rem;
+    border: none;
+    margin: auto;
+    background-color: #182d09 ;
+    color: white;
+    cursor: pointer;
+    position: fixed;
+    transition: all 0.3s;
+
+}
+
+.openChatBtn.open {
+    left: 100%;
+    transition: all 0.3s;
+}
+
+.chat {
+
+    .closeBtn {
+        display: block;
+        background: #e2d2b6;
+        border: none;
+        margin-left: auto;
+        font-size: 1rem;
+    }
+
+    .send-btn {
         font-size: 2rem;
+        border: none;
         margin: auto;
-        background-color: #26a69a ;
-        color: white;
+        background: transparent;
+        color: #a18c7d;
         cursor: pointer;
     }
     #chat-container {
-        display: none;
+        position: fixed;
+        transition: all 1s;
+        left: 100%;
+        bottom: 5%;
+        background-color: #e2d2b6; 
+        border-radius: 15px;
+        padding: 25px;
         #messages {
             max-height: 50vh;
             overflow: scroll;
+            overflow-x: hidden;
+            overflow-y: auto;
             text-align: left;
+            scroll-behavior: smooth;
         }
         form {
             display:flex;
-            textarea {
+            input[type="text"] {
                 width: 100%;
+                border-radius: 10px;
+                padding: 5px;
+                border: none;
+                background: #c5b4a0;
             }
         }
     }
     #chat-container.open {
-        display: block;
+        // display: block;
+        transition: all 1s;
+        left: 76%;
+        bottom: 5%;
+    }
+
+    .chat-header {
+        margin-bottom: 15px;
+    }
+
+    .chat-header svg {
+        font-size: 1.8rem;
+    }
+
+    .bot-message,
+    .user-message {
+        width: fit-content;
+    }
+
+    .bot-message p {
+        border-radius: 5px;
+        background: #a18c7d;
+        padding: 8px;
+    }
+
+    .user-message,
+    .user-message small {
+        text-align: right;
+        margin-left: auto;
+    }
+
+    .user-message p {
+        border-radius: 5px;
+        background: #f2e8c4;
+        padding: 8px;
+    }
+
+    .user-message p,
+    .bot-message p {
+        margin-bottom: 10px;
     }
 }
