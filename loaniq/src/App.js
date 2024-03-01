@@ -9,6 +9,9 @@ import Apply from "./Pages/Apply";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Chat from "./Components/Chat";
+import AdminLogin from "./Pages/AdminLogin";
+import AdminDashboard from "./Pages/AdminDashboard";
+import UserDashboard from "./Pages/UserDashboard";
 
 function App() {
   return (
@@ -21,6 +24,9 @@ function App() {
           <Route path="/apply" element={<Apply />}/>
           <Route path="/login" element={<Login />}/>
           <Route path="/register" element={<Register />}/>
+          <Route path="/admin/login" element={<AdminLogin />}/>
+          <Route path="/admin/dashboard" element={<AdminDashboard />}/>
+          <Route path="/user/dashboard" element={<UserDashboard />}/>
         </Routes>
         <Chat />
         <Footer />
