@@ -14,10 +14,17 @@ export default function Hero() {
       <div className="row align-items-center">
         <div className="col-md-6">
           <div className="hero-text">
-            <h3>Find a Loan with LoanIQ</h3>
-            <p>Find the best loan for you with LoanIQ</p>
-            <button className="btn btn-secondary" onClick={handleGetStarted}>
-              Get Started
+            <h3 style={{ fontSize: "44px" }}>
+              Find the Perfect Loan with LoanIQ
+            </h3>
+            <h4 style={{ fontSize: "24px" }}>We Make It Simple:</h4>
+            <p style={{ fontSize: "18px" }}>
+              Whether you're looking for a mortgage, personal loan, or auto
+              financing, LoanIQ simplifies the process and helps you navigate
+              through the myriad of options available in the market.
+            </p>
+            <button className="btn btn-green" onClick={handleGetStarted}>
+              Get Started Today
             </button>
           </div>
         </div>
@@ -42,6 +49,28 @@ export default function Hero() {
       </div>
 
       <style jsx>{`
+        .hero-text {
+          margin-top: -75px;
+        }
+
+        .hero-text h4 {
+          color: #182d09;
+          margin-bottom: 25px;
+        }
+        .hero-text h3 {
+          margin-bottom: 25px;
+        }
+
+        .btn-green {
+          background-color: green;
+          color: white;
+          border: none;
+        }
+
+        .btn-green:hover {
+          background-color: darkgreen;
+        }
+
         .hero-image {
           margin-left: 100px;
           max-width: 100%;
@@ -49,7 +78,6 @@ export default function Hero() {
           max-height: 800px;
           z-index: 1;
         }
-
         .wave {
           position: absolute;
           bottom: 0;
@@ -63,12 +91,21 @@ export default function Hero() {
           position: relative;
           display: block;
           width: calc(168% + 2.3px);
-          height: 240px;
+          height: 150px;
           filter: drop-shadow(0px 5px 15px rgba(0, 0, 0, 0.1));
         }
 
         .wave .shape-fill {
           fill: #f7f3e8;
+        }
+
+        @media (max-width: 767px) {
+          .hero-image {
+            margin-right: 10px;
+          }
+          .wave {
+            margin-top: 100px !important;
+          }
         }
       `}</style>
     </div>

@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import Hero from "../Components/hero";
 import Hero2 from "../Components/hero2";
 import SlideShow from "../Components/SlideShow";
@@ -6,7 +6,8 @@ import MiddleQuote from "../Components/MiddleQuote";
 
 export default function Home() {
   useEffect(() => {
-    document.querySelector(".home-nav-item").style.borderBottom = "2px solid #182d09";
+    document.querySelector(".home-nav-item").style.borderBottom =
+      "2px solid #182d09";
   }, []);
   return (
     <div>
@@ -17,7 +18,7 @@ export default function Home() {
         <Hero2 />
       </div>
       <div className="slideshow-container">
-        {/* <SlideShow /> */}
+        <SlideShow />
       </div>
       <style jsx>
         {`
@@ -26,7 +27,6 @@ export default function Home() {
             margin-left: 200px;
           }
           .slideshow-container {
-            margin-top: 250px;
             margin-bottom: 100px;
           }
           .hero2-container {
