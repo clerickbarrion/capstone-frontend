@@ -2,7 +2,7 @@ import React from "react";
 
 export default function DashboardHeader(props) {
   return (
-    <div class={props.show ? "side-nav z-0" : "side-nav active z-1"}>
+    <div class={props.show ? "side-nav active z-1" : "side-nav z-0"}>
       <ul class="d-flex flex-column">
         {props.links.map((link) => (
           <li>

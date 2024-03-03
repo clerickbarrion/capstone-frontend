@@ -55,12 +55,23 @@ export default function Login() {
                           <label for="floatingInput">Password</label>
                         </div>
 
-                        <div class="d-flex align-items-center justify-content-center pb-4">
-                          <p class="mb-0 me-2">Not an admin? Return to user login</p>
-                          <a href="/login">
-                          <button type="button" class="btn btn-outline-danger">
-                            Back
+                        <a class="d-flex">
+                          <button type="button" class="btn btn-primary w-100 mb-3">
+                            Sign-in
                           </button>
+                        </a>
+
+                        <div class="d-flex align-items-center justify-content-center pb-4">
+                          <p class="mb-0 me-2">
+                            Not an admin? Return to user login
+                          </p>
+                          <a href="/login">
+                            <button
+                              type="button"
+                              class="btn btn-outline-danger"
+                            >
+                              Back
+                            </button>
                           </a>
                         </div>
                       </form>
