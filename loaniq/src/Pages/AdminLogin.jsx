@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { useLocation } from "react-router-dom";
 import logo from "../Assets/Images/loaniq-logo.png";
 
 export default function Login() {
   let location = useLocation();
+const [userid, setUserid] = useState('');
+const [password, setPassword] = useState(''); 
   useEffect(() => {
     if (location.pathname === "/admin/login") {
       document.querySelector("nav").style.display = "none";
@@ -12,6 +14,27 @@ export default function Login() {
       document.querySelector(".openChatBtn").style.display = "none";
     }
   }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch('http://localhost:4000/adminsignin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ userid, password})
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+      localStorage.setItem('adminInfo', JSON.stringify(data));
+      window.location = '/admin/dashboard'; // Redirect to /admin/dashboard
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  }
+
   return (
     <div className="container-fluid py-3 my-auto mx-auto">
       <section class="h-100">
@@ -32,7 +55,7 @@ export default function Login() {
                         </a>
                       </div>
 
-                      <form>
+                      <form onSubmit={handleSubmit}>
                         <p>Please login to your account</p>
 
                         <div class="form-floating mb-4">
@@ -41,6 +64,8 @@ export default function Login() {
                             class="form-control"
                             id="floatingInput"
                             placeholder="Admin ID"
+                            value={userid}
+                            onChange={(e) => setUserid(e.target.value)}
                           />
                           <label for="floatingInput">Admin ID</label>
                         </div>
@@ -51,12 +76,14 @@ export default function Login() {
                             class="form-control"
                             id="floatingInput"
                             placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                           />
                           <label for="floatingInput">Password</label>
                         </div>
 
                         <a class="d-flex">
-                          <button type="button" class="btn btn-primary w-100 mb-3">
+                          <button type="submit" class="btn btn-primary w-100 mb-3">
                             Sign-in
                           </button>
                         </a>
