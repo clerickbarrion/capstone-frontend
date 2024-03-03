@@ -3,7 +3,6 @@ import logo from "../Assets/Images/loaniq-logo.png";
 
 export default function Header(props) {
   const { activePage } = props; // Destructuring activePage from props
-  const logoStyle = activePage === "about" ? "white" : "";
   const [isLogged, setIsLogged] = useState(false);
 
   useEffect(() => {
@@ -17,7 +16,6 @@ export default function Header(props) {
     window.location.reload();
     setIsLogged(false);
   }
-  const { activePage } = props;
   const logoStyle = activePage === "about" ? "brightness(0) invert(1)" : "";
   const linkStyle = activePage === "about" ? "brightness(0) invert(1)" : "";
 
