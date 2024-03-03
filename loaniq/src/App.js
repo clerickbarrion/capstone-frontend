@@ -42,6 +42,9 @@ function App() {
         <Footer />
         <style jsx>{`
           // your CSS styles
+          body {
+            background-color: #fff5ea;
+          }
         `}</style>
       </div>
     </Router>

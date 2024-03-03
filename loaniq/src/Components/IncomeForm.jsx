@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 
-export default function IncomeForm() {    
+export default function IncomeForm(props) {    
   const creditScoreInput = useRef(350);
   const [creditScore, setCreditScore] = useState(
     creditScoreInput.current.value
@@ -40,6 +40,8 @@ export default function IncomeForm() {
               class="form-control"
               id="floatingInput"
               placeholder="Monthly Income"
+              name="Monthly Income"
+              onChange={props.isValid}
             />
             <label class="text-muted" for="floatingInput">
               Monthly income...
@@ -56,6 +58,8 @@ export default function IncomeForm() {
               class="form-control"
               id="floatingInput"
               placeholder="Monthly Expenses"
+              name="Monthly Expenses"
+              onChange={props.isValid}
             />
             <label class="text-muted" for="floatingInput">
               Monthly expenses...
