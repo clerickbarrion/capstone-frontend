@@ -1,7 +1,22 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import logo from "../Assets/Images/loaniq-logo.png";
 
 export default function Header(props) {
+  const { activePage } = props; // Destructuring activePage from props
+  const logoStyle = activePage === "about" ? "white" : "";
+  const [isLogged, setIsLogged] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("userInfo")) {
+      setIsLogged(true);
+    }
+  }, [isLogged]);
+
+  function logout() {
+    localStorage.removeItem("userInfo");
+    window.location.reload();
+    setIsLogged(false);
+  }
   const { activePage } = props;
   const logoStyle = activePage === "about" ? "brightness(0) invert(1)" : "";
   const linkStyle = activePage === "about" ? "brightness(0) invert(1)" : "";
@@ -64,9 +79,9 @@ export default function Header(props) {
                 </a>
               </li>
             </ul>
-            <a href="/login">
-              <button class="btn btn-outline-dark login-btn">Login</button>
-            </a>
+            <a href="/login"><button class={isLogged ? "d-none" : "btn btn-outline-dark login-btn"}>Login</button></a>
+            <a href="/user/dashboard"><button class={isLogged ? "btn btn-outline-dark login-btn me-4" : "d-none"}>My Dashboard</button></a>
+            <a onClick={() => logout()}><button class={isLogged ? "btn btn-outline-dark login-btn" : "d-none"} type="button">Logout</button></a>
           </div>
         </div>
       </nav>
