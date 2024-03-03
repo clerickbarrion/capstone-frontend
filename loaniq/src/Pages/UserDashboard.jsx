@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import DashboardHeader from "../Components/DashboardHeader";
 import { RxHamburgerMenu } from "react-icons/rx";
+import LoanCardGrid from "../Components/LoanCardGrid";
 
 export default function UserDashboard() {
   const location = useLocation();
@@ -34,6 +35,7 @@ export default function UserDashboard() {
         </a>
       </header>
       <DashboardHeader show={showSideNav} links={['My Loans', 'My Payments']}/>
+      <LoanCardGrid />
       <style jsx>{`
         .welcome-msg {
           margin: 0 15px;

@@ -2,7 +2,7 @@ import React from "react";
 // loanType, loanAmount, loanLength
 // 24, 36, 48, 60, 72 and 84
 
-export default function LoanForm() {
+export default function LoanForm(props) {
   return (
     <div class="loanForm">
       <label class="mb-2">Select your desired loan type:</label>
@@ -17,7 +17,9 @@ export default function LoanForm() {
           type="number"
           class="form-control"
           id="floatingInput"
+          name="Loan Amount"
           placeholder="Monthly Income"
+          onChange={props.isValid}
         />
         <label class="text-muted" for="floatingInput">
           Loan Amount
