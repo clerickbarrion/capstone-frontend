@@ -25,15 +25,18 @@ function App() {
       <div class="d-flex flex-column min-vh-100">
         <Header activePage={activePage} />
         <Routes>
-          <Route path="/" element={<Home />}/>
-          <Route path="/about" element={<About />}/>
-          <Route path="/apply" element={<Apply />}/>
-          <Route path="/login" element={<Login />}/>
-          <Route path="/register" element={<Register />}/>
-          <Route path="/admin/login" element={<AdminLogin />}/>
-          <Route path="/admin/dashboard" element={<AdminDashboard />}/>
-          <Route path="/user/dashboard" element={<UserDashboard />}/>
-          <Route path="/payments" element={<Payments />}/>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/about"
+            element={<About handlePageChange={handlePageChange} />}
+          />
+          <Route path="/apply" element={<Apply />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/user/dashboard" element={<UserDashboard />} />
+          <Route path="/payments" element={<Payments />} />
         </Routes>
         <Chat />
         <Footer />
