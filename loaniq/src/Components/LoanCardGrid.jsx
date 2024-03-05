@@ -9,7 +9,7 @@ export default function LoanCardGrid(props) {
   const [loanData, setLoanData] = useState([]);
   const [isUser, setIsUser] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [userID, setUserID] = useState("");
+  const [userID, setUserID] = useState(JSON.parse(localStorage.getItem("userInfo"))[0].userid);
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("userInfo"))) {
