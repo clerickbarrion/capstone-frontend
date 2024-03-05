@@ -12,7 +12,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div className="Home-Page">
       <div className="hero-container">
         <Hero />
       </div>
@@ -26,6 +26,10 @@ export default function Home() {
       </div>
       <style jsx>
         {`
+          // .Home-Page {
+          //   max-width: 1600px;
+          //   margin: 0 auto;
+          // }
           .hero-container {
             margin-top: 20px;
           }
@@ -36,6 +40,11 @@ export default function Home() {
             displey: flex;
             justify-content: center;
             width: 100%;
+          }
+          @media screen and (max-width: 768px) {
+            .slideshow-container {
+              margin: 0 50px 50px;
+            }
           }
         `}
       </style>

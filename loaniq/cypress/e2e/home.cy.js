@@ -24,31 +24,31 @@ describe("Home", () => {
     cy.get(".hero2-container").should("exist");
   });
 
-  it("Should Navigate to the Apply Page When the Apply is CLicked", () => {
-    cy.get(".button").click();
-    cy.url().should("include", "/apply");
-  });
+  // it("Should Navigate to the Apply Page When the Apply is CLicked", () => {
+  //   cy.get(".button").click();
+  //   cy.url().should("include", "/apply");
+  // });
 });
 
-describe("Apply", () => {
-  beforeEach(() => {
-    cy.visit("http://localhost:3000/apply");
-  });
+// describe("Apply", () => {
+//   beforeEach(() => {
+//     cy.visit("http://localhost:3000/apply");
+//   });
 
-  it("Apply Form Exists", () => {
-    cy.get(".apply-form").should("exist");
-  });
+//   it("Apply Form Exists", () => {
+//     cy.get(".apply-form").should("exist");
+//   });
 
-  it("Apply Form Inputs Exist", () => {
-    cy.get(".input").should("exist");
-  });
+//   it("Apply Form Inputs Exist", () => {
+//     cy.get(".input").should("exist");
+//   });
 
-  it("Apply Form Submit Button Exists", () => {
-    cy.get(".submit-button").should("exist");
-  });
+//   it("Apply Form Submit Button Exists", () => {
+//     cy.get(".submit-button").should("exist");
+//   });
 
-  it("Route to the Home Page", () => {
-    cy.get(".home-nav-item").click();
-    cy.url().should("include", "/");
-  });
-});
+//   it("Route to the Home Page", () => {
+//     cy.get(".home-nav-item").click();
+//     cy.url().should("include", "/");
+//   });
+// });

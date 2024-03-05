@@ -55,12 +55,11 @@ export default function Hero() {
         }
 
         .hero-image {
-          max-width: 100%;
           height: auto;
-          max-height: 800px;
           z-index: -1;
           position: relative;
           overflow: hidden;
+          object-fit: cover;
         }
 
         @media (max-width: 768px) {

@@ -8,12 +8,7 @@ export default function Hero2() {
         <div className="col p-0">
           {" "}
           <div className="hero-image-container">
-            <img
-              src={heroImage2}
-              alt="hero"
-              className="img-fluid hero-image"
-              style={{ width: "100%", height: "auto" }}
-            />
+            <img src={heroImage2} alt="hero" className="img-fluid hero-image" />
             <div className="hero-text-container">
               <h1 className="text-white">
                 Less application time, more family time.
@@ -29,7 +24,8 @@ export default function Hero2() {
           overflow: hidden;
         }
         .hero-image-container img {
-          height: 400vh;
+          width: 100%;
+          height: auto;
         }
 
         .hero-text-container {
