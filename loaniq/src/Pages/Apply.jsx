@@ -1,13 +1,15 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import LoanForm from "../Components/LoanForm";
 import IncomeForm from "../Components/IncomeForm";
 import ApplyConfirm from "../Components/ApplyConfirm";
 
 export default function Apply() {
+  const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [warning, setWarning] = useState({});
   const [missingFields, setMissingFields] = useState(false);
-  const [evalSuccess, setEvalSuccess] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
   const backBtn = useRef(null);
   const nextBtn = useRef(null);
   const submitBtn = useRef(null);
@@ -24,6 +26,17 @@ export default function Apply() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    submitBtn.current.disabled = true;
+    let userID;
+
+    if(localStorage.getItem('userInfo') === null) {
+      userID = null;
+      setIsLogged(false);
+    } else {
+      userID = JSON.parse(localStorage.getItem('userInfo'))[0].userid;
+      setIsLogged(true);
+    }
+
     const inputValues = [
       e.target[0].value,
       e.target[1].value,
@@ -33,7 +46,7 @@ export default function Apply() {
       e.target[5].value,
     ];
     const submission = {
-      UserID: JSON.parse(localStorage.getItem('userInfo'))[0].userid,
+      UserID: userID,
       creditScore: e.target[0].value,
       income: e.target[1].value,
       expenses: e.target[2].value,
@@ -42,6 +55,7 @@ export default function Apply() {
       loanLength: e.target[5].value,
       incomeDebtRatio: e.target[2].value / e.target[1].value,
     };
+
     fetch("http://localhost:4000/api/evaluateLoan", {
       method: "POST",
       headers: {
@@ -70,10 +84,17 @@ export default function Apply() {
             }
             setWarning(warningMessage);
             setMissingFields(true);
+            submitBtn.current.disabled = false;
           });
         } else {
-          window.location = "/apply/success";
+          if(isLogged) {
+            submitBtn.current.disabled = true;
+            document.querySelector("#loan-eval-form").reset();
+            return navigate('/apply/success', { state: { data: result } });
+          }
+          navigate('/apply/success', { state: { data: result } });
           document.querySelector("#loan-eval-form").reset();
+          submitBtn.current.disabled = true;
         }
       })
       .catch((error) => console.log("error", error));
@@ -206,7 +227,7 @@ export default function Apply() {
           >
             Next
           </button>
-          <button type="submit" ref={submitBtn} class="float-end form-btns" data-bs-toggle={evalSuccess ? "modal" : ""} data-bs-target={evalSuccess ? "#staticBackdrop" : null}>
+          <button type="submit" ref={submitBtn} class="submitBtn float-end form-btns">
             Submit
           </button>
         </form>
@@ -216,6 +237,15 @@ export default function Apply() {
           background-color: transparent;
           border: none;
           border-bottom: 1px solid black;
+        }
+
+        .submitBtn.disabled {
+          opacity: 0.2;
+        }
+
+        .submitBtn.disabled:hover {
+          background-color: transparent;
+          color: black;
         }
 
         .form-btns {

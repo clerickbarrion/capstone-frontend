@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import DashboardHeader from "../Components/DashboardHeader";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -7,8 +7,17 @@ import LoanCardGrid from "../Components/LoanCardGrid";
 export default function UserDashboard() {
   const location = useLocation();
   const [showSideNav, setShowSideNav] = useState(false);
+  const adminDashBtn = useRef(null);
 
   useEffect(() => {
+    if(localStorage.getItem('userInfo') === null) {
+      window.location = "/login";
+    }
+
+    if(JSON.parse(localStorage.getItem('userInfo'))[0].usertype === "admin") {
+      adminDashBtn.current.classList.remove('d-none');
+    }
+
     if (location.pathname === "/user/dashboard") {
       document.querySelector(".main-header").style.display = "none";
       document.querySelector(".main-footer").style.display = "none";
@@ -28,11 +37,18 @@ export default function UserDashboard() {
           />
           <h4 class="welcome-msg">User Dashboard</h4>
         </div>
-        <a href="/" class="back-home-btn">
-          <button class="btn back-home-btn btn-outline-dark float-end">
-            Back to LoanIQ Home
-          </button>
-        </a>
+        <div>
+          <a href="/admin/dashboard" ref={adminDashBtn} class="back-home-btn me-3 d-none">
+            <button class="btn back-home-btn btn-outline-dark float-right">
+              Admin Dashboard
+            </button>
+          </a>
+          <a href="/" class="back-home-btn">
+            <button class="btn back-home-btn btn-outline-dark float-right">
+              Back to LoanIQ Home
+            </button>
+          </a>
+        </div>
       </header>
       <DashboardHeader show={showSideNav} links={['My Loans', 'My Payments']}/>
       <LoanCardGrid />

@@ -4,8 +4,8 @@ import logo from "../Assets/Images/loaniq-logo.png";
 
 export default function Login() {
   let location = useLocation();
-  const [emailaddress, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [emailaddress, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   useEffect(() => {
     if (location.pathname === "/login") {
       document.querySelector("nav").style.display = "none";
@@ -17,22 +17,23 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('http://localhost:4000/signin', {
-      method: 'POST',
+    const response = await fetch("http://localhost:4000/signin", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ emailaddress, password})
+      body: JSON.stringify({ emailaddress, password }),
     })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-      localStorage.setItem('userInfo', JSON.stringify(data));
-      window.location = '/user/dashboard'; // Redirect to /user/dashboard
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        localStorage.setItem("userInfo", JSON.stringify(data));
+        window.location = "/user/dashboard"; // Redirect to /user/dashboard
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        document.querySelector(".warningBox").classList.remove("d-none");
+      });
   };
   return (
     <div className="container-fluid py-3 my-auto mx-auto">
@@ -55,6 +56,20 @@ export default function Login() {
                       </div>
 
                       <form onSubmit={handleSubmit}>
+                        <div class="p-3 border warningBox border-2 bg-danger bg-opacity-10 border-danger-subtle text-danger mb-3 d-none">
+                          <button
+                            type="button"
+                            class="btn-close"
+                            aria-label="Close"
+                            style={{ float: "right" }}
+                            onClick={() =>
+                              document
+                                .querySelector(".warningBox")
+                                .classList.add("d-none")
+                            }
+                          ></button>
+                          <p class="m-0">Your email address or password is incorrect. Please try again.</p>
+                        </div>
                         <p>Please login to your account</p>
 
                         <div class="form-floating mb-4">
@@ -96,9 +111,12 @@ export default function Login() {
                         <div class="d-flex align-items-center justify-content-center pb-4">
                           <p class="mb-0 me-2">Don't have an account?</p>
                           <a href="/register">
-                          <button type="button" class="btn btn-outline-danger">
-                            Create new
-                          </button>
+                            <button
+                              type="button"
+                              class="btn btn-outline-danger"
+                            >
+                              Create new
+                            </button>
                           </a>
                         </div>
                       </form>
@@ -129,37 +147,36 @@ export default function Login() {
           preserveAspectRatio="none"
         >
           <path
-            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+            d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
             class="shape-fill"
           ></path>
         </svg>
       </div>
       <style jsx>{`
         .wave {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            overflow: hidden;
-            line-height: 0;
-            transform: rotate(180deg);
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          overflow: hidden;
+          line-height: 0;
         }
-        
+
         .wave svg {
-            position: relative;
-            display: block;
-            width: calc(191% + 1.3px);
-            height: 500px;
+          position: relative;
+          display: block;
+          width: calc(120% + 1.3px);
+          height: 190px;
         }
-        
+
         .wave .shape-fill {
-            fill: #182d09;
+          fill: #182d09;
         }
 
         @media screen and (max-width: 991px) {
-            .wave {
-                display: none;
-            }
+          .wave {
+            display: none;
+          }
         }
       `}</style>
     </div>

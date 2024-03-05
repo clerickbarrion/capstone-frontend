@@ -13,6 +13,12 @@ export default function AdminDashboard() {
   }
 
   useEffect(() => {
+    if(localStorage.getItem('userInfo') === null) {
+      window.location = "/admin/login";
+    }
+
+    // if(JSON.parse(localStorage.getItem('userInfo'))[0].usertype === null) {
+
     if (location.pathname === "/admin/dashboard") {
       document.querySelector(".main-header").style.display = "none";
       document.querySelector(".main-footer").style.display = "none";

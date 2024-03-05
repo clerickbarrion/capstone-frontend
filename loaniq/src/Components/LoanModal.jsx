@@ -1,38 +1,29 @@
 import React from "react";
 
 export default function LoanModal(props) {
-  const modalId = `exampleModal-${props.loanID}`; // Generate unique id for each modal
+  const modalId = `exampleModal-${props.loanID}`;
 
   return (
     <div>
-      <button
-        type="button modal-btn"
-        className="btn text-light"
-        data-bs-toggle="modal"
-        data-bs-target={`#${modalId}`} // Use the generated unique id as the target
-        style={{ zIndex: "2", backgroundColor: "#182d06"}}
-      >
-        Review Loan
-      </button>
       <div
         className="modal fade"
-        id={modalId} // Use the generated unique id for the modal's id
+        id={modalId}
         tabIndex="-1"
-        aria-labelledby={`${modalId}Label`} // Use the generated unique id for aria-labelledby
+        aria-labelledby={`${modalId}Label`}
         aria-hidden="true"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
-            <div class={
-        props.riskLevel == "Low"
-          ? "modal-header text-bg-success text-light"
-          : props.riskLevel == "Medium"
-          ? "modal-header text-bg-warning"
-          : "modal-header text-bg-danger text-light"
-      }>
-              <h1 className="modal-title fs-5" id={`${modalId}Label`}>
+            <div className={
+              props.riskLevel === "Low"
+                ? "modal-header bg-success text-light"
+                : props.riskLevel === "Medium"
+                ? "modal-header bg-warning text-dark"
+                : "modal-header bg-danger text-light"
+            }>
+              <h5 className="modal-title" id={`${modalId}Label`}>
                 Loan Details
-              </h1>
+              </h5>
               <button
                 type="button"
                 className="btn-close"
@@ -40,14 +31,14 @@ export default function LoanModal(props) {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body text-dark">
-                <ul>
-                    <li><strong>Client:</strong> {props.clientName}</li>
-                    <li><strong>Loan Type:</strong> {props.loanType}</li>
-                    <li><strong>Loan Term:</strong> {props.loanTerm}</li>
-                    <li><strong>Risk Level:</strong>  {props.riskLevel}</li>
-                    <li><strong>Risk Reason:</strong> {props.riskReason}</li>
-                </ul>
+            <div className="modal-body">
+              <ul>
+                <li><strong>Client:</strong> {props.clientID}</li>
+                <li><strong>Loan Type:</strong> {props.loanType}</li>
+                <li><strong>Loan Term:</strong> {props.loanTerm}</li>
+                <li><strong>Risk Level:</strong> {props.riskLevel}</li>
+                <li><strong>Risk Reason:</strong> {props.riskReason}</li>
+              </ul>
             </div>
             <div className="modal-footer">
               <button
@@ -64,9 +55,6 @@ export default function LoanModal(props) {
           </div>
         </div>
       </div>
-      <style jsx>{`
-.modal-btn {
-      `}</style>
     </div>
   );
 }
