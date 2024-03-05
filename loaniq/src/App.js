@@ -13,6 +13,7 @@ import AdminLogin from "./Pages/AdminLogin";
 import AdminDashboard from "./Pages/AdminDashboard";
 import UserDashboard from "./Pages/UserDashboard";
 import Payments from "./Pages/Payments";
+import ApplySuccess from "./Pages/ApplySuccess";
 
 function App() {
   const [activePage, setActivePage] = useState("home");
@@ -37,13 +38,13 @@ function App() {
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/user/dashboard" element={<UserDashboard />} />
           <Route path="/payments" element={<Payments />} />
+          <Route path="/apply/success" element={<ApplySuccess />} />
         </Routes>
         <Chat />
         <Footer />
         <style jsx>{`
-          // your CSS styles
           body {
-            background-color: #fff5ea;
+            background-color: #f7f3e8;
           }
         `}</style>
       </div>
