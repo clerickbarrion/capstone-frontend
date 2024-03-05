@@ -39,9 +39,7 @@ export default function LoanCardGrid(props) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: {
-        UserID: userID,
-      },
+      body: JSON.stringify({ UserID: userID })
     })
       .then((response) => response.json())
       .then((data) => {
