@@ -22,10 +22,10 @@ export default function SlideShow() {
   return (
     <div className="swiper-container">
       <h1>The LoanIQ Advantage</h1>
+      <div className="swiper-button-next" onClick={handleNextButtonClick}></div>
       <Swiper
         modules={[Navigation, Pagination]}
         spaceBetween={80}
-        slidesPerView={3}
         pagination={{ clickable: true }}
         onSwiper={setSwiper}
         loop={true}
@@ -33,12 +33,17 @@ export default function SlideShow() {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
         }}
+        breakpoints={{
+          1000: {
+            slidesPerView: 3,
+          },
+        }}
         onSlideChange={() => console.log("slide change")}
       >
-        <div
+        {/* <div
           className="swiper-button-next"
           onClick={handleNextButtonClick}
-        ></div>
+        ></div> */}
         <SwiperSlide className="slide1">
           <h4>Streamlined Application Process:</h4>
           <p>
@@ -82,24 +87,8 @@ export default function SlideShow() {
             of the way.{" "}
           </p>
         </SwiperSlide>
-        <div
-          className="swiper-button-prev"
-          onClick={handlePrevButtonClick}
-        ></div>
       </Swiper>
-      <div className="custom-shape-divider-top-1709339668">
-        <svg
-          data-name="Layer 1"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-            className="shape-fill"
-          />
-        </svg>
-      </div>
+      <div className="swiper-button-prev" onClick={handlePrevButtonClick}></div>
 
       <style jsx>{`
         .swiper-container {
@@ -117,13 +106,10 @@ export default function SlideShow() {
         }
 
         .swiper-slide {
-          border: 1px solid #ccc;
+          border: 4px solid black;
+          border-radius: 10px;
           padding: 20px;
           margin-top: 100px;
-        }
-        .swiper swiper-initialized swiper-horizontal swiper-backface-hidden {
-          display: flex;
-          justify-content: center;
         }
 
         .slide1,
@@ -144,35 +130,14 @@ export default function SlideShow() {
           color: black;
           height: 1rem !important;
           width: 1rem !important;
+          margin: 0 -25px;
+          border: 3px solid black;
+          border-radius: 50%;
+          padding: 15px;
         }
         .swiper-button-next::after,
         .swiper-button-prev::after {
           font-size: 1rem;
-        }
-        .custom-shape-divider-top-1709339668 {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          overflow: hidden;
-          line-height: 0;
-        }
-
-        .custom-shape-divider-top-1709339668 svg {
-          position: relative;
-          display: block;
-          width: calc(148% + 1.3px);
-          height: 150px;
-        }
-
-        .custom-shape-divider-top-1709339668 .shape-fill {
-          fill: #f7f3e8;
-        }
-
-        @media (max-width: 698px) {
-          .swiper-slide {
-            margin-top: 0; // Remove margin top for small screens
-          }
         }
       `}</style>
     </div>
