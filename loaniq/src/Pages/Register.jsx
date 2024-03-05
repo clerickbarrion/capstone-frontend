@@ -17,24 +17,54 @@ export default function Register() {
       document.querySelector(".openChatBtn").style.display = "none";
     }
   }, []);
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const response = await fetch('http://localhost:4000/newuser', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({ firstname, lastname, emailaddress, password, confirmpassword})
+  //   })
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     console.log('Success:', data);
+  //     window.location = '/user/dashboard'; // Redirect to /user/dashboard
+  //   })
+  //   .catch((error) => {
+  //     console.error('Error:', error);
+  //   });
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('http://localhost:4000/newuser', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ firstname, lastname, emailaddress, password, confirmpassword})
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-      window.location = '/user/dashboard'; // Redirect to /user/dashboard
-    })
-    .catch((error) => {
+  
+    try {
+      const response = await fetch('http://localhost:4000/newuser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ firstname, lastname, emailaddress, password, confirmpassword })
+      });
+  
+      if (response.ok) {
+        // Successful response
+        const data = await response.json();
+        console.log('Success:', data);
+        window.location = '/user/dashboard'; // Redirect to /user/dashboard
+      } else {
+        // Error response
+        const errorData = await response.json();
+        console.error('Error:', errorData.error);
+        // Handle the error as needed (e.g., show an error message to the user)
+      }
+    } catch (error) {
+      // Network or other errors
       console.error('Error:', error);
-    });
+    }
   };
+  
+
   return (
     <div>
       <section class="h-100">
