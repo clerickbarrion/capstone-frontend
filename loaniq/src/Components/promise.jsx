@@ -25,7 +25,7 @@ export default function promise() {
             />
           </svg>
         </div>
-        <div className="wave-bottom">
+        {/* <div className="wave-bottom">
           <svg
             data-name="Layer 1"
             xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@ export default function promise() {
               className="shape-fill"
             />
           </svg>
-        </div>
+        </div> */}
       </div>
       <style jsx>{`
         .container-fluid {
