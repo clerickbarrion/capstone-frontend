@@ -44,6 +44,7 @@ export default function LoanCardGrid(props) {
       .then((response) => response.json())
       .then((data) => {
         setLoanData(data);
+        console.log(data)
       })
       .catch((error) => console.log("error", error));
   }, []);
@@ -64,7 +65,7 @@ export default function LoanCardGrid(props) {
                 creditScore={loan.creditScore}
                 monthlyIncome={loan.income}
                 monthlyExpenses={loan.expenses}
-                reviewState={"Under Review"}
+                reviewState={loan.LoanStatus}
               />
             ))
         : isAdmin && location.pathname === "/admin/dashboard"
