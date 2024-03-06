@@ -54,6 +54,7 @@ export default function Apply() {
       loanAmount: e.target[4].value,
       loanLength: e.target[5].value,
       incomeDebtRatio: e.target[2].value / e.target[1].value,
+      applyDate: new Date(),
     };
 
     fetch("http://localhost:4000/api/evaluateLoan", {
