@@ -38,9 +38,6 @@ export default function SlideShow() {
             nextEl: ".swiper-button-next",
           }}
           breakpoints={{
-            1400: {
-              slidesPerView: 4,
-            },
             1000: {
               slidesPerView: 3,
             },

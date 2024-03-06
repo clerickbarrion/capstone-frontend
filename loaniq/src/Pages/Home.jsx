@@ -26,13 +26,6 @@ export default function Home() {
       </div>
       <style jsx>
         {`
-          // .Home-Page {
-          //   max-width: 1600px;
-          //   margin: 0 auto;
-          // }
-          .hero-container {
-            margin-top: 20px;
-          }
           .slideshow-container {
             margin: 0 100px 100px;
           }

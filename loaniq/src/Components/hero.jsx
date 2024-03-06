@@ -10,7 +10,7 @@ export default function Hero() {
   };
 
   return (
-    <div className="container">
+    <div className="hero-container">
       <div className="row align-items-center">
         <div className="col-md-6">
           <div className="hero-text text-center">
@@ -36,6 +36,11 @@ export default function Hero() {
       </div>
 
       <style jsx>{`
+        .hero-container {
+          display: flex;
+          justify-content: space-between;
+          margin: 0 100px;
+        }
         .hero-text h4 {
           color: #182d09;
           margin-bottom: 25px;
@@ -65,6 +70,9 @@ export default function Hero() {
         @media (max-width: 768px) {
           .hero-text {
             margin-left: 0;
+          }
+          .hero-container {
+            margin: 0 0;
           }
         }
       `}</style>
