@@ -1,15 +1,24 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import Modal from 'react-modal'
+
 
 function Loan(props) {
     const [modalIsOpen, setModalIsOpen] = React.useState(false)
     const openModal = () => {setModalIsOpen(true)}
     const closeModal = () => {setModalIsOpen(false)}
+    function makePayment(e){
+        fetch(`http://localhost:4000/makePayment`, {
+            body: JSON.stringify({LoanID: props.loanID, AmountPaid: e.target.previousSibling.value}), 
+            method: 'POST', 
+            headers: {'Content-Type': 'application/json'}
+        })
+        window.location.reload()
+    }
   return (
     <div className='loan'>
-        <h1>{props.loanType} Loan</h1>
+        <h1>{props.loanType}</h1>
         <div>Loan Amount: {props.loanAmount}</div>
-        <div>Loan Term: {props.loanTerm}</div>
+        <div>Loan Term: {props.loanTerm} months</div>
         <div>Amount Paid: {props.amountPaid}</div>
         <div>Next payment due: {props.nextPayment}</div>
         <button onClick={openModal}>Make Payment</button>
@@ -19,7 +28,7 @@ function Loan(props) {
             <div>Minimum Payment: $50</div>
             <form>
                 <input type="text" placeholder="Enter amount" />
-                <button>Pay</button>
+                <button onClick={makePayment}>Pay</button>
             </form>
             <button onClick={closeModal}>Close</button>
         </Modal>
@@ -29,10 +38,20 @@ function Loan(props) {
 }
 
 export default function Payments() {
+  const [loans, setLoans] = useState([])
+
+  useEffect(()=>{
+    fetch(`http://localhost:4000/getLoans`, {
+        body: JSON.stringify({UserID: JSON.parse(localStorage.getItem('userInfo'))[0].userid}), 
+        method: 'POST', 
+        headers: {'Content-Type': 'application/json'}
+    }).then(response => response.json()).then(data => setLoans(data))
+  },[])
   return (
     <div>
-      <Loan loanType={"Personal"} loanAmount={1000} loanTerm={12} amountPaid={500} nextPayment={"30 days"}/>
-      <Loan loanType={"Personal"} loanAmount={1000} loanTerm={12} amountPaid={500} nextPayment={"30 days"}/>
+      {loans.length ? loans.map(loan => {
+        return <Loan loanID={loan.loanid} loanType={loan.loan_type} loanAmount={loan.loan_amount} loanTerm={loan.loan_term} amountPaid={loan.amount_paid} nextPayment={"30 Days"}/>
+      }) : <h1>No loans found</h1>}
       <style jsx>
         {`
           .loan {

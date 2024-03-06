@@ -20,6 +20,24 @@ export default function Register() {
       document.querySelector(".openChatBtn").style.display = "none";
     }
   }, []);
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const response = await fetch('http://localhost:4000/newuser', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({ firstname, lastname, emailaddress, password, confirmpassword})
+  //   })
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     console.log('Success:', data);
+  //     window.location = '/user/dashboard'; // Redirect to /user/dashboard
+  //   })
+  //   .catch((error) => {
+  //     console.error('Error:', error);
+  //   });
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     for(let i = 0; i < form.current.length-1; i++) {
@@ -48,6 +66,8 @@ export default function Register() {
       document.querySelector('.warningBox').classList.remove('d-none');
     });
   };
+  
+
   return (
     <div>
       <section class="h-100">

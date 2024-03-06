@@ -57,6 +57,9 @@ export default function MeetTeam() {
           margin: 0 auto;
           margin-bottom: 20px;
         }
+        .row {
+          margin: 0 50px;
+        }
       `}</style>
     </div>
   );
