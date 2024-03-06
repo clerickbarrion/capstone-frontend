@@ -27,7 +27,7 @@ const [password, setPassword] = useState('');
     .then(response => response.json())
     .then(data => {
       console.log('Success:', data);
-      localStorage.setItem('adminInfo', JSON.stringify(data));
+      localStorage.setItem('userInfo', JSON.stringify(data));
       window.location = '/admin/dashboard'; // Redirect to /admin/dashboard
     })
     .catch((error) => {
