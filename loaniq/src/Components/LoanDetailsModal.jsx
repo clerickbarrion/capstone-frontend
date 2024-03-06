@@ -42,9 +42,6 @@ export default function LoanDetailsModal(props) {
             </div>
             <div className="modal-body text-dark">
                 <ul>
-                    <li><strong>Your Credit Score:</strong> {props.creditScore}</li>
-                    <li><strong>Your Monthly Income:</strong> ${props.monthlyIncome}</li>
-                    <li><strong>Your Monthly Expenses:</strong> ${props.monthlyExpenses}</li>
                     <li><strong>Loan Amount:</strong> ${props.loanAmt}</li>
                     <li><strong>Loan Type:</strong> {props.loanType}</li>
                     <li><strong>Loan Term:</strong> {props.loanTerm}</li>
