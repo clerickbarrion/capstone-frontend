@@ -14,6 +14,7 @@ import AdminDashboard from "./Pages/AdminDashboard";
 import UserDashboard from "./Pages/UserDashboard";
 import Payments from "./Pages/Payments";
 import ApplySuccess from "./Pages/ApplySuccess";
+import Error404 from "./Pages/Error404";
 
 function App() {
   const [activePage, setActivePage] = useState("home");
@@ -39,6 +40,7 @@ function App() {
           <Route path="/user/dashboard" element={<UserDashboard />} />
           <Route path="/payments" element={<Payments />} />
           <Route path="/apply/success" element={<ApplySuccess />} />
+          <Route path="*" element={<Error404 />} />
         </Routes>
         <Chat />
         <Footer />

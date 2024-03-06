@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import logo from "../Assets/Images/loaniq-logo.png";
 
 export default function Register() {
+  const form = useRef(null);
+  const warningMessage = useRef(null);
   let location = useLocation();
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [emailaddress, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmpassword, setConfirmpassword] = useState('');
+
   useEffect(() => {
     if (location.pathname === "/register") {
       document.querySelector("nav").style.display = "none";
@@ -37,31 +40,31 @@ export default function Register() {
   // };
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    try {
-      const response = await fetch('http://localhost:4000/newuser', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ firstname, lastname, emailaddress, password, confirmpassword })
-      });
-  
-      if (response.ok) {
-        // Successful response
-        const data = await response.json();
-        console.log('Success:', data);
-        window.location = '/user/dashboard'; // Redirect to /user/dashboard
-      } else {
-        // Error response
-        const errorData = await response.json();
-        console.error('Error:', errorData.error);
-        // Handle the error as needed (e.g., show an error message to the user)
+    for(let i = 0; i < form.current.length-1; i++) {
+      if(form.current[i].value === '') {
+        form.current[i].classList.add('is-invalid');
       }
-    } catch (error) {
-      // Network or other errors
-      console.error('Error:', error);
     }
+
+    if(password !== confirmpassword) {
+      warningMessage.current.innerHTML = 'Passwords do not match.';
+    }
+    const response = await fetch('http://localhost:4000/newuser', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ firstname, lastname, emailaddress, password, confirmpassword})
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      window.location = '/user/dashboard';
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      document.querySelector('.warningBox').classList.remove('d-none');
+    });
   };
   
 
@@ -84,8 +87,21 @@ export default function Register() {
                           />
                         </a>
                       </div>
-
-                      <form onSubmit={handleSubmit}>
+                      <div class="p-3 border warningBox border-2 bg-danger bg-opacity-10 border-danger-subtle text-danger mb-3 d-none">
+                          <button
+                            type="button"
+                            class="btn-close"
+                            aria-label="Close"
+                            style={{ float: "right" }}
+                            onClick={() =>
+                              document
+                                .querySelector(".warningBox")
+                                .classList.add("d-none")
+                            }
+                          ></button>
+                          <p class="m-0" ref={warningMessage}>Please fill out the missing forms.</p>
+                        </div>
+                      <form ref={form} onSubmit={handleSubmit}>
                         <p>Please sign-up to create your account</p>
 
                         <div class="row">
@@ -93,11 +109,12 @@ export default function Register() {
                             <div class="form-floating mb-4">
                               <input
                                 type="text"
+                                name="First Name"
                                 class="form-control"
                                 id="floatingInput"
                                 placeholder="First Name"
                                 value={firstname}
-                                onChange={(e) => setFirstname(e.target.value)}
+                                onChange={(e) => {setFirstname(e.target.value); e.target.classList.remove('is-invalid')}}
                               />
                               <label for="floatingInput">First Name</label>
                             </div>
@@ -106,11 +123,12 @@ export default function Register() {
                             <div class="form-floating mb-4">
                               <input
                                 type="text"
+                                name="Last Name"
                                 class="form-control"
                                 id="floatingInput"
                                 placeholder="Last Name"
                                 value={lastname}
-                                onChange={(e) => setLastname(e.target.value)}
+                                onChange={(e) => {setLastname(e.target.value); e.target.classList.remove('is-invalid')}}
                               />
                               <label for="floatingInput">Last Name</label>
                             </div>
@@ -120,11 +138,12 @@ export default function Register() {
                         <div class="form-floating mb-4">
                           <input
                             type="email"
+                            name="Email Address"
                             class="form-control"
                             id="floatingInput"
                             placeholder="name@example.com"
                             value={emailaddress}
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={(e) => {setEmail(e.target.value); e.target.classList.remove('is-invalid')}}
                           />
                           <label for="floatingInput">Email address</label>
                         </div>
@@ -132,11 +151,12 @@ export default function Register() {
                         <div class="form-floating mb-4">
                           <input
                             type="password"
+                            name="Password"
                             class="form-control"
                             id="floatingInput"
                             placeholder="Password"
                             value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={(e) => {setPassword(e.target.value); e.target.classList.remove('is-invalid')}}
                           />
                           <label for="floatingInput">Password</label>
                         </div>
@@ -145,6 +165,7 @@ export default function Register() {
                           <input
                             type="password"
                             class="form-control"
+                            name="Confirm your password"
                             id="floatingInput"
                             placeholder="Confirm Password"
                             value={confirmpassword}

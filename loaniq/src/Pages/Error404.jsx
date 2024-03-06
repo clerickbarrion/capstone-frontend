@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function Error404() {
+
   return (
     <div class="container-fluid">
       <div class="rounded p-4 d-flex flex-column align-items-center">
