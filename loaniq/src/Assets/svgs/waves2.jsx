@@ -95,6 +95,7 @@ export default function Waves2({ variant }) {
           height: 87px;
           margin-bottom: -87px;
           transform: rotateY(180deg);
+          filter: drop-shadow(0px 5px 15px rgba(0, 0, 0, 0.1));
         }
 
         .wave1-bottom .shape-fill {
