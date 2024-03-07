@@ -50,20 +50,23 @@ function Loan(props) {
             <button onClick={closeModal}>Close</button>
         </Modal>
     </div>
-    
-  )
+  );
 }
 
 export default function Payments() {
-  const [loans, setLoans] = useState([])
+  const [loans, setLoans] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     fetch(`http://localhost:4000/getLoans`, {
-        body: JSON.stringify({UserID: JSON.parse(localStorage.getItem('userInfo'))[0].userid}), 
-        method: 'POST', 
-        headers: {'Content-Type': 'application/json'}
-    }).then(response => response.json()).then(data => setLoans(data))
-  },[])
+      body: JSON.stringify({
+        UserID: JSON.parse(localStorage.getItem("userInfo"))[0].userid,
+      }),
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => response.json())
+      .then((data) => setLoans(data));
+  }, []);
   return (
     <div>
       {loans.length ? loans.map(loan => {
@@ -76,10 +79,18 @@ export default function Payments() {
             border: 1px solid #000;
             padding: 20px;
             background-color: #e2d2b6;
+            border-radius: 10px;
+            width: 300px;
+            margin: 10px;
           }
-          
+          .loan button {
+            border-radius: 10px;
+            padding: 5px;
+            background-color: #182d09;
+            color: white;
+          }
         `}
       </style>
     </div>
-  )
+  );
 }
