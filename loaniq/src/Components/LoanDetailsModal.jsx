@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function LoanDetailsModal(props) {
-  const modalId = `exampleModal-${props.loanID}`; // Generate unique id for each modal
+  const modalId = `exampleModal-${props.loanID}`;
 
   return (
     <div>
@@ -9,16 +9,16 @@ export default function LoanDetailsModal(props) {
         type="button"
         className="btn text-light"
         data-bs-toggle="modal"
-        data-bs-target={`#${modalId}`} // Use the generated unique id as the target
+        data-bs-target={`#${modalId}`}
         style={{ zIndex: "2", backgroundColor: "#182d06"}}
       >
         Review Loan
       </button>
       <div
         className="modal fade"
-        id={modalId} // Use the generated unique id for the modal's id
+        id={modalId}
         tabIndex="-1"
-        aria-labelledby={`${modalId}Label`} // Use the generated unique id for aria-labelledby
+        aria-labelledby={`${modalId}Label`}
         aria-hidden="true"
       >
         <div className="modal-dialog">
