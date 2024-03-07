@@ -3,19 +3,22 @@ import { useLocation } from "react-router-dom";
 import DashboardHeader from "../Components/DashboardHeader";
 import { RxHamburgerMenu } from "react-icons/rx";
 import LoanCardGrid from "../Components/LoanCardGrid";
+import Payments from "../Pages/Payments";
 
 export default function UserDashboard() {
   const location = useLocation();
   const [showSideNav, setShowSideNav] = useState(false);
   const adminDashBtn = useRef(null);
+  const [showPayments, setShowPayments] = useState(false);
+  const [showLoan, setShowLoan] = useState(true);
 
   useEffect(() => {
-    if(localStorage.getItem('userInfo') === null) {
+    if (localStorage.getItem("userInfo") === null) {
       window.location = "/login";
     }
 
-    if(JSON.parse(localStorage.getItem('userInfo'))[0].usertype === "admin") {
-      adminDashBtn.current.classList.remove('d-none');
+    if (JSON.parse(localStorage.getItem("userInfo"))[0].usertype === "admin") {
+      adminDashBtn.current.classList.remove("d-none");
     }
 
     if (location.pathname === "/user/dashboard") {
@@ -26,32 +29,54 @@ export default function UserDashboard() {
     }
   }, []);
 
-  return (  
+  const handleLinkClick = (link) => {
+    if (link === "My Payments") {
+      setShowPayments(true);
+      setShowLoan(false);
+      setShowSideNav(false);
+    }
+    if (link === "My Loans") {
+      setShowLoan(true);
+      setShowPayments(false);
+      setShowSideNav(false);
+    }
+  };
+
+  return (
     <div>
-      <header class="d-flex w-100 justify-content-between align-items-center">
-        <div class="d-flex align-items-center">
+      <header className="d-flex w-100 justify-content-between align-items-center">
+        <div className="d-flex align-items-center">
           <RxHamburgerMenu
             onClick={() => {
               setShowSideNav(!showSideNav);
             }}
           />
-          <h4 class="welcome-msg">User Dashboard</h4>
+          <h4 className="welcome-msg">User Dashboard</h4>
         </div>
         <div>
-          <a href="/admin/dashboard" ref={adminDashBtn} class="back-home-btn me-3 d-none">
-            <button class="btn back-home-btn btn-outline-dark float-right">
+          <a
+            href="/admin/dashboard"
+            ref={adminDashBtn}
+            className="back-home-btn me-3 d-none"
+          >
+            <button className="btn back-home-btn btn-outline-dark float-right">
               Admin Dashboard
             </button>
           </a>
-          <a href="/" class="back-home-btn">
-            <button class="btn back-home-btn btn-outline-dark float-right">
+          <a href="/" className="back-home-btn">
+            <button className="btn back-home-btn btn-outline-dark float-right">
               Back to LoanIQ Home
             </button>
           </a>
         </div>
       </header>
-      <DashboardHeader show={showSideNav} links={['My Loans', 'My Payments']}/>
-      <LoanCardGrid />
+      <DashboardHeader
+        show={showSideNav}
+        links={["My Loans", "My Payments"]}
+        onLinkClick={handleLinkClick}
+      />
+      {showPayments && <Payments />}
+      {showLoan && <LoanCardGrid />}
       <style jsx>{`
         .welcome-msg {
           margin: 0 15px;
