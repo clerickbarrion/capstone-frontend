@@ -8,14 +8,19 @@ export default function UserDashboard() {
   const location = useLocation();
   const [showSideNav, setShowSideNav] = useState(false);
   const adminDashBtn = useRef(null);
+  const [grid, setGrid] = useState("My Loans");
+
+  function changeView(e) {
+    setGrid(e);
+  }
 
   useEffect(() => {
-    if(localStorage.getItem('userInfo') === null) {
+    if (localStorage.getItem("userInfo") === null) {
       window.location = "/login";
     }
 
-    if(JSON.parse(localStorage.getItem('userInfo'))[0].usertype === "admin") {
-      adminDashBtn.current.classList.remove('d-none');
+    if (JSON.parse(localStorage.getItem("userInfo"))[0].usertype === "admin") {
+      adminDashBtn.current.classList.remove("d-none");
     }
 
     if (location.pathname === "/user/dashboard") {
@@ -26,7 +31,7 @@ export default function UserDashboard() {
     }
   }, []);
 
-  return (  
+  return (
     <div>
       <header class="d-flex w-100 justify-content-between align-items-center">
         <div class="d-flex align-items-center">
@@ -38,7 +43,11 @@ export default function UserDashboard() {
           <h4 class="welcome-msg">User Dashboard</h4>
         </div>
         <div>
-          <a href="/admin/dashboard" ref={adminDashBtn} class="back-home-btn me-3 d-none">
+          <a
+            href="/admin/dashboard"
+            ref={adminDashBtn}
+            class="back-home-btn me-3 d-none"
+          >
             <button class="btn back-home-btn btn-outline-dark float-right">
               Admin Dashboard
             </button>
@@ -50,8 +59,14 @@ export default function UserDashboard() {
           </a>
         </div>
       </header>
-      <DashboardHeader show={showSideNav} links={['My Loans', 'My Payments']}/>
-      <LoanCardGrid />
+      <DashboardHeader
+        show={showSideNav}
+        links={["My Loans", "My Payments"]}
+        changeView={changeView}
+        setSideNav={setShowSideNav}
+      />
+
+      <LoanCardGrid selectGrid={grid} />
       <style jsx>{`
         .welcome-msg {
           margin: 0 15px;

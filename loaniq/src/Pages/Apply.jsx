@@ -54,6 +54,7 @@ export default function Apply() {
       loanAmount: e.target[4].value,
       loanLength: e.target[5].value,
       incomeDebtRatio: e.target[2].value / e.target[1].value,
+      applyDate: new Date(),
     };
 
     fetch("http://localhost:4000/api/evaluateLoan", {
@@ -148,7 +149,7 @@ export default function Apply() {
   }, [step]);
 
   return (
-    <div class="container d-flex flex-column flex-grow-1 justify-content-between">
+    <div class="container mb-5 d-flex flex-column flex-grow-1 justify-content-between">
       <ApplyConfirm startEval={startEval} />
       <div class="form-container">
         <button

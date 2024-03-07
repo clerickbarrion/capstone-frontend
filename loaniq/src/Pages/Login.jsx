@@ -13,6 +13,10 @@ export default function Login() {
       document.querySelector(".chat").style.display = "none";
       document.querySelector(".openChatBtn").style.display = "none";
     }
+
+    if (localStorage.getItem("userInfo") !== null) {
+      window.location= "/"
+    }
   }, []);
 
   const handleSubmit = async (e) => {
@@ -103,9 +107,6 @@ export default function Login() {
                           >
                             Log in
                           </button>
-                          <a class="text-muted" href="#!">
-                            Forgot password?
-                          </a>
                         </div>
 
                         <div class="d-flex align-items-center justify-content-center pb-4">

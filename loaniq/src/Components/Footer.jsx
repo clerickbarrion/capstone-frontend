@@ -1,7 +1,17 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import logo from "../Assets/Images/loaniq-logo.png";
 
 export default function Footer() {
+  const adminLoginLink = useRef(null);
+
+
+  useEffect(() => {
+    if(localStorage.getItem("userInfo") !== null) {
+      adminLoginLink.current.style.display = "none";
+    }
+  }, []);
+
+
   return (
     <div class="mt-auto main-footer">
       <div class="container">
@@ -34,7 +44,7 @@ export default function Footer() {
                   About Us
                 </a>
               </li>
-              <li class="nav-item mb-2">
+              <li ref={adminLoginLink} class="nav-item mb-2">
                 <a href="/admin/login" class="nav-link p-0 text-body-secondary">
                   Admin Login
                 </a>

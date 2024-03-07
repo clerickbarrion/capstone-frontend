@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Values from "..//Components/values";
 import Promise from "../Components/promise";
 import MeetTeam from "../Components/MeetTeam";
+import Wave2 from "../Assets/svgs/waves2";
 
 export default function About({ handlePageChange }) {
   useEffect(() => {
@@ -18,8 +19,14 @@ export default function About({ handlePageChange }) {
       <div className="promise-container">
         <Promise />
       </div>
+      <div className="Wave2-top-container">
+        <Wave2 variant="top" />
+      </div>
       <div className="values-container">
         <Values />
+      </div>
+      <div className="Wave2-top-container-2">
+        <Wave2 variant="bottom" />
       </div>
       <div className="meet-the-team-container">
         <MeetTeam />
@@ -29,11 +36,14 @@ export default function About({ handlePageChange }) {
         .Our-Promise-Statement {
           margin-top: 200px;
         }
+        .Wave2-top-container {
+          margin-top: 300px;
+        }
         .promise-container {
           margin-top: 250px;
         }
         .values-container {
-          margin-top: 405px;
+          margin-top: 75px;
         }
         .meet-the-team-container {
           margin-top: 200px;
