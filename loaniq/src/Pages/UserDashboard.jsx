@@ -14,6 +14,10 @@ export default function UserDashboard() {
     setGrid(e);
   }
 
+  function setSideNav() {
+    setShowSideNav(!showSideNav);
+  }
+
   useEffect(() => {
     if (localStorage.getItem("userInfo") === null) {
       window.location = "/login";
@@ -63,7 +67,7 @@ export default function UserDashboard() {
         show={showSideNav}
         links={["My Loans", "My Payments"]}
         changeView={changeView}
-        setSideNav={setShowSideNav}
+        setSideNav={setSideNav}
       />
 
       <LoanCardGrid selectGrid={grid} />
