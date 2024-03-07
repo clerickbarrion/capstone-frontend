@@ -3,14 +3,20 @@ import { useLocation } from "react-router-dom";
 import DashboardHeader from "../Components/DashboardHeader";
 import { RxHamburgerMenu } from "react-icons/rx";
 import LoanCardGrid from "../Components/LoanCardGrid";
-import Payments from "../Pages/Payments";
 
 export default function UserDashboard() {
   const location = useLocation();
   const [showSideNav, setShowSideNav] = useState(false);
   const adminDashBtn = useRef(null);
-  const [showPayments, setShowPayments] = useState(false);
-  const [showLoan, setShowLoan] = useState(true);
+  const [grid, setGrid] = useState("My Loans");
+
+  function changeView(e) {
+    setGrid(e);
+  }
+
+  function setSideNav() {
+    setShowSideNav(!showSideNav);
+  }
 
   useEffect(() => {
     if (localStorage.getItem("userInfo") === null) {
@@ -29,42 +35,29 @@ export default function UserDashboard() {
     }
   }, []);
 
-  const handleLinkClick = (link) => {
-    if (link === "My Payments") {
-      setShowPayments(true);
-      setShowLoan(false);
-      setShowSideNav(false);
-    }
-    if (link === "My Loans") {
-      setShowLoan(true);
-      setShowPayments(false);
-      setShowSideNav(false);
-    }
-  };
-
   return (
     <div>
-      <header className="d-flex w-100 justify-content-between align-items-center">
-        <div className="d-flex align-items-center">
+      <header class="d-flex w-100 justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
           <RxHamburgerMenu
             onClick={() => {
               setShowSideNav(!showSideNav);
             }}
           />
-          <h4 className="welcome-msg">User Dashboard</h4>
+          <h4 class="welcome-msg">User Dashboard</h4>
         </div>
         <div>
           <a
             href="/admin/dashboard"
             ref={adminDashBtn}
-            className="back-home-btn me-3 d-none"
+            class="back-home-btn me-3 d-none"
           >
-            <button className="btn back-home-btn btn-outline-dark float-right">
+            <button class="btn back-home-btn btn-outline-dark float-right">
               Admin Dashboard
             </button>
           </a>
-          <a href="/" className="back-home-btn">
-            <button className="btn back-home-btn btn-outline-dark float-right">
+          <a href="/" class="back-home-btn">
+            <button class="btn back-home-btn btn-outline-dark float-right">
               Back to LoanIQ Home
             </button>
           </a>
@@ -73,10 +66,11 @@ export default function UserDashboard() {
       <DashboardHeader
         show={showSideNav}
         links={["My Loans", "My Payments"]}
-        onLinkClick={handleLinkClick}
+        changeView={changeView}
+        setSideNav={setSideNav}
       />
-      {showPayments && <Payments />}
-      {showLoan && <LoanCardGrid />}
+
+      <LoanCardGrid selectGrid={grid} />
       <style jsx>{`
         .welcome-msg {
           margin: 0 15px;
