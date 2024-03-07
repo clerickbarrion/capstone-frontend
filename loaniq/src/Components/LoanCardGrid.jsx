@@ -133,14 +133,14 @@ export default function LoanCardGrid(props) {
         userPayments.length ? (
           userPayments.map((loan) => {
             return (
-              <Loan
-                loanID={loan.loanid}
-                loanType={loan.loan_type}
-                loanAmount={loan.loan_amount}
-                loanTerm={loan.loan_term}
-                amountPaid={loan.amount_paid}
-                nextPayment={"30 Days"}
-              />
+              <Loan loanID={loan.loanid} 
+              loanType={loan.loan_type} 
+              loanAmount={loan.loan_amount} 
+              loanTerm={loan.loan_term} 
+              amountPaid={loan.amount_paid}
+              applyDate={loan.applyDate} 
+              endDate={Number(new Date(loan.applyDate)) + (Number(loan.loan_term) * 2629800000)} 
+              nextPayment={"30 Days"}/>
             );
           })
         ) : (
