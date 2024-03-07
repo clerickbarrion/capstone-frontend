@@ -19,25 +19,12 @@ export default function Register() {
       document.querySelector(".chat").style.display = "none";
       document.querySelector(".openChatBtn").style.display = "none";
     }
+
+    if (localStorage.getItem("userInfo") !== null) {
+      window.location= "/"
+    }
   }, []);
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const response = await fetch('http://localhost:4000/newuser', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({ firstname, lastname, emailaddress, password, confirmpassword})
-  //   })
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     console.log('Success:', data);
-  //     window.location = '/user/dashboard'; // Redirect to /user/dashboard
-  //   })
-  //   .catch((error) => {
-  //     console.error('Error:', error);
-  //   });
-  // };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     for(let i = 0; i < form.current.length-1; i++) {
@@ -58,8 +45,13 @@ export default function Register() {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
-      window.location = '/user/dashboard';
+      if(data.error) {
+        warningMessage.current.innerHTML = data.error;
+        document.querySelector('.warningBox').classList.remove('d-none');
+        return;
+      } else {
+        window.location = '/login';
+      }
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -169,7 +161,7 @@ export default function Register() {
                             id="floatingInput"
                             placeholder="Confirm Password"
                             value={confirmpassword}
-                            onChange={(e) => setConfirmpassword(e.target.value)}
+                            onChange={(e) => {setConfirmpassword(e.target.value); e.target.classList.remove('is-invalid')}}
                           />
                           <label for="floatingInput">Confirm Password</label>
                         </div>
@@ -185,7 +177,9 @@ export default function Register() {
                             <span>OR</span>
                           </p>
                           <a class="p" href="/login">
-                            Login
+                            <button type="button" class="btn loginRedirect">
+                              Login
+                            </button>
                           </a>
                         </div>
                       </form>
@@ -210,6 +204,17 @@ export default function Register() {
           .or-span span {
             background: #f7f3e8;
             padding: 0 10px;
+          }
+
+          .loginRedirect {
+            background-color: transparent;
+            color: #000;
+            border: 1px solid #182d09;
+          }
+
+          .loginRedirect:hover {
+            background-color: #182d09;
+            color: #fff;
           }
         `}
       </style>

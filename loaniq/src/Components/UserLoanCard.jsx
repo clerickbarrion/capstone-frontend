@@ -36,7 +36,6 @@ export default function UserLoanCard(props) {
           loanType={props.loanType}
           loanTerm={props.loanTerm}
           reviewState={props.reviewState}
-          comments={props.reason}
         />
       </div>
       <style jsx>{`

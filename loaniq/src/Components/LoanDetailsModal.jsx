@@ -46,7 +46,6 @@ export default function LoanDetailsModal(props) {
                     <li><strong>Loan Type:</strong> {props.loanType}</li>
                     <li><strong>Loan Term:</strong> {props.loanTerm}</li>
                     <li><strong>Current Status:</strong>  {props.reviewState}</li>
-                    <li><strong>Comments:</strong> {props.reason ? 'N/A' : props.reason}</li>
                 </ul>
             </div>
             <div className="modal-footer">

@@ -149,7 +149,7 @@ export default function Apply() {
   }, [step]);
 
   return (
-    <div class="container d-flex flex-column flex-grow-1 justify-content-between">
+    <div class="container mb-5 d-flex flex-column flex-grow-1 justify-content-between">
       <ApplyConfirm startEval={startEval} />
       <div class="form-container">
         <button

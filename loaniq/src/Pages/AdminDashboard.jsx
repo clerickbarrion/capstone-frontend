@@ -3,10 +3,16 @@ import { useLocation } from "react-router-dom";
 import DashboardHeader from "../Components/DashboardHeader";
 import { RxHamburgerMenu } from "react-icons/rx";
 import LoanCardGrid from "../Components/LoanCardGrid";
+import AccessDenied from "../Components/AccessDenied";
 
 export default function AdminDashboard() {
   const location = useLocation();
   const [showSideNav, setShowSideNav] = useState(false);
+  const [grid, setGrid] = useState("All Loans");
+
+  function changeView(e) {
+    setGrid(e);
+  }
   
   function setSideNav() {
     setShowSideNav(!showSideNav);
@@ -17,7 +23,9 @@ export default function AdminDashboard() {
       window.location = "/admin/login";
     }
 
-    // if(JSON.parse(localStorage.getItem('userInfo'))[0].usertype === null) {
+    if(JSON.parse(localStorage.getItem('userInfo'))[0].usertype === "user") {
+      window.location = "/403";
+    }
 
     if (location.pathname === "/admin/dashboard") {
       document.querySelector(".main-header").style.display = "none";
@@ -45,13 +53,16 @@ export default function AdminDashboard() {
         </a>
       </header>
 
+      {}
+
       <DashboardHeader
         show={showSideNav}
-        links={["All Loans", "Assigned Loans", "Client Payments"]}
+        links={["All Loans", "Assigned Loans"]}
+        changeView={changeView}
         setSideNav = {setSideNav}
       />
 
-      <LoanCardGrid />
+      <LoanCardGrid selectGrid={grid}/>
 
       <style jsx>{`
         .welcome-msg {
