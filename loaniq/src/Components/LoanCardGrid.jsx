@@ -2,14 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import LoanCard from "./LoanCard";
 import UserLoanCard from "./UserLoanCard";
+import AssignedLoanCard from "./AssignedLoanCard";
 
 export default function LoanCardGrid(props) {
   const location = useLocation();
   const [reviewLoans, setReviewLoans] = useState([]);
   const [loanData, setLoanData] = useState([]);
+  const [assignedLoans, setAssignedLoans] = useState([]);
   const [isUser, setIsUser] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [userID, setUserID] = useState(JSON.parse(localStorage.getItem("userInfo"))[0].userid);
+  const [userID, setUserID] = useState(
+    JSON.parse(localStorage.getItem("userInfo"))
+      ? JSON.parse(localStorage.getItem("userInfo"))[0].userid
+      : ""
+  );
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("userInfo"))) {
@@ -30,7 +36,7 @@ export default function LoanCardGrid(props) {
       .then((response) => response.json())
       .then((data) => {
         setReviewLoans(data);
-        console.log(data)
+        console.log(data);
       })
       .catch((error) => console.log("error", error));
 
@@ -39,36 +45,52 @@ export default function LoanCardGrid(props) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ UserID: userID })
+      body: JSON.stringify({ UserID: userID }),
     })
       .then((response) => response.json())
       .then((data) => {
         setLoanData(data);
-        console.log(data)
+        console.log(data);
+      })
+      .catch((error) => console.log("error", error));
+
+    fetch("http://localhost:4000/assignedLoans", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ AdminID: userID }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setAssignedLoans(data);
+        console.log(data);
       })
       .catch((error) => console.log("error", error));
   }, []);
 
-
   return (
     <div class="d-flex z-0 flex-wrap justify-content-center">
-      {isUser && location.pathname === "/user/dashboard"
-        ? loanData
-            .map((loan) => (
-              <UserLoanCard
-                key={loan.EvaluationID}
-                loanID={loan.EvaluationID}
-                loanType={loan.loanType}
-                loanAmt={loan.loanAmount}
-                loanTerm={loan.loanLength}
-                riskLevel={loan.riskLevel}
-                creditScore={loan.creditScore}
-                monthlyIncome={loan.income}
-                monthlyExpenses={loan.expenses}
-                reviewState={loan.LoanStatus}
-              />
-            ))
-        : isAdmin && location.pathname === "/admin/dashboard"
+      {isUser &&
+      location.pathname === "/user/dashboard" &&
+      props.selectGrid === "My Loans"
+        ? loanData.map((loan) => (
+            <UserLoanCard
+              key={loan.EvaluationID}
+              loanID={loan.EvaluationID}
+              loanType={loan.loanType}
+              loanAmt={loan.loanAmount}
+              loanTerm={loan.loanLength}
+              riskLevel={loan.riskLevel}
+              creditScore={loan.creditScore}
+              monthlyIncome={loan.income}
+              monthlyExpenses={loan.expenses}
+              reviewState={loan.LoanStatus}
+            />
+          ))
+        : isAdmin &&
+          location.pathname === "/admin/dashboard" &&
+          props.selectGrid === "All Loans" 
         ? reviewLoans.map((loan) => (
             <LoanCard
               key={loan.EvaluationID}
@@ -79,6 +101,20 @@ export default function LoanCardGrid(props) {
               riskLevel={loan.riskLevel}
               riskReason={loan.reason}
               clientID={loan.UserID}
+            />
+          ))
+        : isAdmin &&
+          location.pathname === "/admin/dashboard" &&
+          props.selectGrid === "Assigned Loans"
+        ? assignedLoans.map((loan) => (
+            <AssignedLoanCard
+              key={loan.loanid}
+              loanID={loan.loanid}
+              amtPaid={loan.amount_paid}
+              loanAmt={loan.loan_amount}
+              loanTerm={loan.loan_term}
+              loanType={loan.loan_type}
+              clientID={loan.userid}
             />
           ))
         : null}

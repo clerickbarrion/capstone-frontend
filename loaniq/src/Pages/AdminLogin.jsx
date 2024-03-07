@@ -13,6 +13,10 @@ const [password, setPassword] = useState('');
       document.querySelector(".chat").style.display = "none";
       document.querySelector(".openChatBtn").style.display = "none";
     }
+
+    if (localStorage.getItem("userInfo") !== null) {
+      window.location = "/"
+    }
   }, []);
 
   const handleSubmit = async (e) => {
