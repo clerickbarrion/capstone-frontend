@@ -15,7 +15,7 @@ export default function Login() {
     }
 
     if (localStorage.getItem("userInfo") !== null) {
-      window.location("/")
+      window.location= "/"
     }
   }, []);
 
@@ -107,9 +107,6 @@ export default function Login() {
                           >
                             Log in
                           </button>
-                          <a class="text-muted" href="#!">
-                            Forgot password?
-                          </a>
                         </div>
 
                         <div class="d-flex align-items-center justify-content-center pb-4">
