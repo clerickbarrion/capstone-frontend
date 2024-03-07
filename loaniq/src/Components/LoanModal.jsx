@@ -12,11 +12,12 @@ export default function LoanModal(props) {
       body: JSON.stringify({
         EvaluationID: props.loanID,
         LoanStatus: "Approved",
+        AdminID: JSON.parse(localStorage.getItem("userInfo"))[0].userid,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        window.location.reload()
       })
       .catch((error) => console.log("error", error));
   };
@@ -34,7 +35,7 @@ export default function LoanModal(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        window.location.reload()
       })
       .catch((error) => console.log("error", error));
   };

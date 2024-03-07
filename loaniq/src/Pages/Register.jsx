@@ -59,7 +59,7 @@ export default function Register() {
     .then(response => response.json())
     .then(data => {
       console.log(data);
-      window.location = '/user/dashboard';
+      window.location = '/login';
     })
     .catch((error) => {
       console.error('Error:', error);
