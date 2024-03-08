@@ -18,7 +18,12 @@ export default function Chat() {
         catch {socket.emit('get user', 'Guest')}
 
         socket.on('addAdminList', admin=>setAdminList(adminList.push(admin.admin)))
-        socket.on('removeAdminList', admin=>setAdminList(adminList.filter(a => a !== admin.admin)))
+        socket.on('removeAdminList', admin=>{
+            console.log(admin)
+            setAdminList(adminList.pop(admin))
+            console.log(adminList)
+        })
+
   
         socket.on('ping admin', room =>{
             try {
@@ -55,6 +60,7 @@ export default function Chat() {
                 if (!adminList.length) {
                     newMessage.innerHTML += `<p>No admins are available at the moment. Type 2 to chat with LoanBot.</p>`
                     messages.appendChild(newMessage)
+                    messages.scrollTop += 1000
                 } else {
                     newMessage.innerHTML += `
                         <small>LoanBot</small>
