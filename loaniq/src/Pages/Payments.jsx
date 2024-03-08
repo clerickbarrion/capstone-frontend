@@ -30,7 +30,7 @@ function Loan(props) {
   };
 
   function makePayment(e) {
-    fetch(`http://localhost:4000/makePayment`, {
+    fetch(`https://loaniq-server.glitch.me/makePayment`, {
       body: JSON.stringify({
         LoanID: props.loanID,
         AmountPaid: e.target.previousSibling.value,
