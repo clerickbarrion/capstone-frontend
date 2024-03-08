@@ -9,6 +9,7 @@ import {io} from 'socket.io-client'
 export default function Chat() {
     const [human, setHuman] = useState(false)
     const [room, setRoom] = useState('')
+    const [adminList, setAdminList] = useState([])
 
     const socket = io('https://loaniq-server.glitch.me')
 
@@ -16,6 +17,9 @@ export default function Chat() {
         try {socket.emit('get user', JSON.parse(localStorage.getItem('userInfo'))[0])}
         catch {socket.emit('get user', 'Guest')}
 
+        socket.on('addAdminList', admin=>setAdminList(adminList.push(admin.admin)))
+        socket.on('removeAdminList', admin=>setAdminList(adminList.filter(a => a !== admin.admin)))
+  
         socket.on('ping admin', room =>{
             try {
                 if (JSON.parse(localStorage.getItem('userInfo'))[0].firstname === room) {
@@ -41,12 +45,12 @@ export default function Chat() {
                 messages.appendChild(newMessage)
                 messages.scrollTop += 1000
         })
-        socket.on('adminList', adminList => {
-            if (adminList.userid === JSON.parse(localStorage.getItem('userInfo'))[0].userid) {
+        socket.on('adminList', listRequest => {
+            if (listRequest.userid === JSON.parse(localStorage.getItem('userInfo'))[0].userid) {
                 const messages = document.querySelector('#messages')
                 let newMessage = document.createElement('div')
                     newMessage.classList.add('bot-message')
-                if (!adminList.adminList.length) {
+                if (!adminList.length) {
                     newMessage.innerHTML += `<p>No admins are available at the moment. Type 2 to chat with LoanBot.</p>`
                     messages.appendChild(newMessage)
                 } else {
@@ -55,7 +59,7 @@ export default function Chat() {
                         <p id='adminlist'>Click on an admin to chat with them:<br></p>`
                     
                     const list = newMessage.querySelector('#adminlist')
-                    adminList.adminList.forEach(admin => {
+                    adminList.forEach(admin => {
                         list.innerHTML += `<mark>${admin}</mark><br>`
                     })
                     messages.appendChild(newMessage)
