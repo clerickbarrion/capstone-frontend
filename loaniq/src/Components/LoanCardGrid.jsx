@@ -29,7 +29,7 @@ export default function LoanCardGrid(props) {
         setIsAdmin(true);
       }
     }
-    fetch("http://localhost:4000/reviewLoan", {
+    fetch("https://loaniq-server.glitch.me/reviewLoan", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +42,7 @@ export default function LoanCardGrid(props) {
       })
       .catch((error) => console.log("error", error));
 
-    fetch("http://localhost:4000/loaninfo", {
+    fetch("https://loaniq-server.glitch.me/loaninfo", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +56,7 @@ export default function LoanCardGrid(props) {
       })
       .catch((error) => console.log("error", error));
 
-    fetch("http://localhost:4000/assignedLoans", {
+    fetch("https://loaniq-server.glitch.me/assignedLoans", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -70,7 +70,7 @@ export default function LoanCardGrid(props) {
       })
       .catch((error) => console.log("error", error));
 
-    fetch("http://localhost:4000/getLoans", {
+    fetch("https://loaniq-server.glitch.me/getLoans", {
       body: JSON.stringify({ UserID: userID }),
       method: "POST",
       headers: { "Content-Type": "application/json" },
