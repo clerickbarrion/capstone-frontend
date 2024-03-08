@@ -57,7 +57,7 @@ export default function Apply() {
       applyDate: new Date(),
     };
 
-    fetch("http://localhost:4000/api/evaluateLoan", {
+    fetch("https://loaniq-server.glitch.me/api/evaluateLoan", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
