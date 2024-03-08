@@ -134,7 +134,7 @@ export default function Chat() {
                     <p>${message}</p>`
                 messages.appendChild(newMessage)
                 messages.scrollTop += 1000
-                const botMessage = await fetch('http://localhost:4000/api/botMessage', {
+                const botMessage = await fetch('https://loaniq-server.glitch.me/api/botMessage', {
                     body: JSON.stringify({message,history}), 
                     method: 'POST', 
                     headers: {'Content-Type': 'application/json'}
