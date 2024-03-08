@@ -23,6 +23,8 @@ export default function Chat() {
         socket.on('ping admin', room =>{
             try {
                 if (JSON.parse(localStorage.getItem('userInfo'))[0].firstname === room) {
+                    setRoom(room)
+                    setHuman(true)
                     socket.emit('admin join', room)
                 }
             } catch {}
