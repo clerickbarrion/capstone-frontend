@@ -22,7 +22,7 @@ export default function Home() {
       </div>
       <Wave variant="bottom" />
       <div className="slideshow-container">
-        {/* <SlideShow /> */}
+         <SlideShow /> 
       </div>
       <style jsx>
         {`
