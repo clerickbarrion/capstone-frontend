@@ -10,7 +10,7 @@ export default function Chat() {
     const [human, setHuman] = useState(false)
     const [room, setRoom] = useState('')
 
-    const socket = io('http://localhost:4000')
+    const socket = io('https://loaniq-server.glitch.me')
 
     useEffect(() => {
         try {socket.emit('get user', JSON.parse(localStorage.getItem('userInfo'))[0])}
