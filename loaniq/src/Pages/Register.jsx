@@ -36,7 +36,7 @@ export default function Register() {
     if(password !== confirmpassword) {
       warningMessage.current.innerHTML = 'Passwords do not match.';
     }
-    const response = await fetch('http://localhost:4000/newuser', {
+    const response = await fetch('https://loaniq-server.glitch.me/newuser', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
