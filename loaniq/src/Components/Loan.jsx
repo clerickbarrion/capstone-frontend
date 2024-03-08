@@ -3,9 +3,7 @@ import Modal from "react-modal";
 
 export default function Loan(props) {
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
-
-    const [endDate, setEndDate] = useState(new Date())
-    const [timeLeft, setTimeLeft] = useState(countdown(new Date(props.endDate)))
+    const [timeLeft, setTimeLeft] = useState(countdown(new Date(props.applyDate)))
     const minimum = (props.loanAmount / props.loanTerm)
 
     useEffect(()=>{
