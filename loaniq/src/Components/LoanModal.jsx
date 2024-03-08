@@ -4,7 +4,7 @@ export default function LoanModal(props) {
   const modalId = `exampleModal-${props.loanID}`;
 
   const handleApprove = () => {
-    fetch("http://localhost:4000/updateLoan", {
+    fetch("https://loaniq-server.glitch.me/updateLoan", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -23,7 +23,7 @@ export default function LoanModal(props) {
   };
 
   const handleDeny = () => {
-    fetch("http://localhost:4000/updateLoan", {
+    fetch("https://loaniq-server.glitch.me/updateLoan", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
