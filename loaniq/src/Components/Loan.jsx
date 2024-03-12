@@ -40,7 +40,7 @@ export default function Loan(props) {
     fetch(`https://loaniq-server.glitch.me/makePayment`, {
       body: JSON.stringify({
         LoanID: props.loanID,
-        AmountPaid: e.target.previousSibling.value,
+        AmountPaid: e.target.parentElement.previousElementSibling.value,
       }),
       method: "POST",
       headers: { "Content-Type": "application/json" },
