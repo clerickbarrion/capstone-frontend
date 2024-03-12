@@ -13,7 +13,7 @@ function Loan(props) {
   };
 
   function makePayment(e) {
-    fetch(`http://localhost:4000/makePayment`, {
+    fetch(`https://loaniq-server.glitch.me/makePayment`, {
       body: JSON.stringify({
         LoanID: props.loanID,
         AmountPaid: e.target.previousSibling.value,
@@ -97,7 +97,7 @@ export default function Payments() {
   const [loans, setLoans] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:4000/getLoans`, {
+    fetch(`https://loaniq-server.glitch.me/getLoans`, {
       body: JSON.stringify({
         UserID: JSON.parse(localStorage.getItem("userInfo"))[0].userid,
       }),
