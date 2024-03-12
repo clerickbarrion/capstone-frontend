@@ -14,9 +14,9 @@ export default function Loan(props) {
 
   function countdown(applyDate) {
     const today = Number(new Date());
-    let nextMonth = Number(new Date(applyDate)) + 2629800000;
+    let nextMonth = Number(new Date(applyDate)) + 2629800000**2;
     while (nextMonth < today) {
-      nextMonth += 2629800000;
+      nextMonth += 2629800000**2;
     }
     const time = nextMonth - today;
     const daysLeft = Math.floor(
